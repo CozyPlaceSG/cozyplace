@@ -7,58 +7,69 @@
 <meta name="description" content="The coziest date idea to unwind and connect. Private 3-hour rooms for two in Singapore, from $55.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400&family=Headland+One&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Headland+One&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/SunlinerRevival-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-/* ---------- Brand font ----------
-   Sunliner Revival is served from assets/fonts/ (WOFF2 first, OTF as backup).
-   Fraunces from Google Fonts is only a fallback while it loads. */
+/* =========================================================
+   Brand font: Sunliner Revival (assets/fonts). Specs below mirror
+   the Figma file "CozyPlace_Landing Pages" (Desktop 1512 / Mobile 390).
+   ========================================================= */
 @font-face{
   font-family:"Sunliner Revival";
-  src:local("Sunliner Revival"),local("SunlinerRevival-Regular"),
-      url("assets/fonts/SunlinerRevival-Regular.woff2") format("woff2"),
+  src:url("assets/fonts/SunlinerRevival-Regular.woff2") format("woff2"),
       url("assets/fonts/SunlinerRevival-Regular.otf") format("opentype");
   font-display:swap;
 }
 
 :root{
-  --green:#536460;
-  --green-soft:#73958f;
+  --green:#53645c;
+  --teal:#739b98;
   --ink:#1a1a1a;
   --cream:#fff9ee;
   --sage:#d9e3de;
-  --grey:#666;
-  --grey-light:#d4d4d4;
-  --bar:rgba(57,57,57,.6);
+  --grey:#666666;
+  --grey-dark:#454545;
+  --cell-line:#73827a;
 
-  --display:"Sunliner Revival","Fraunces",Georgia,serif;
+  --display:"Sunliner Revival",Georgia,serif;
   --body:"Poppins",system-ui,sans-serif;
   --label:"Headland One",Georgia,serif;
 
-  --content:1054px;
-  --pad-section:120px;
-  --gutter:24px;
-  --radius-card:40px 40px 0 40px; /* CozyPlace card shape: square bottom-right */
+  --content:1054px;   /* desktop content column */
+  --side:64px;        /* min side space on smaller desktops */
+  --sec:120px;        /* desktop section padding */
+  --ps:20px;          /* paragraph spacing */
+  --r-card:40px 40px 0 40px;
 }
 
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--cream);color:var(--ink);font:400 16px/1.5 var(--body);-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--cream);color:var(--ink);font:400 16px/1.5 var(--body);-webkit-font-smoothing:antialiased;padding-bottom:104px}
 img{display:block;max-width:100%}
-h1,h2,h3,p{margin:0}
+h1,h2,h3,p,figure,blockquote{margin:0}
 button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
 a{color:inherit}
-:focus-visible{outline:2px solid var(--green-soft);outline-offset:3px}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+.wrap{width:min(var(--content),100% - 2*var(--side));margin-inline:auto}
+.m-only{display:none}
+.stack > * + *{margin-top:var(--ps)}
 
-.wrap{width:min(var(--content),100% - 2*var(--gutter));margin-inline:auto}
-.display{font-family:var(--display);font-weight:400;letter-spacing:0}
-.h2{font:400 40px/1.2 var(--display);color:var(--green)}
-.eyebrow{font:400 14px/1.4 var(--display);letter-spacing:.1em;text-transform:uppercase;color:var(--green)}
+/* ---------- Type scale (Desktop styles) ---------- */
+.t-hero{font:400 64px/1.1 var(--display);text-transform:uppercase;color:var(--green)}
+.t-h1{font:400 52px/1 var(--display)}
+.t-h2{font:400 40px/1.2 var(--display)}
+.t-h3{font:400 32px/1.2 var(--display)}
+.t-h4{font:400 24px/1.5 var(--display)}
+.t-heading{font:400 16px/1.4 var(--display)}
+.t-hlabel{font:400 14px/1.4 var(--display);letter-spacing:.1em;text-transform:uppercase}
+.t-body{font:400 16px/1.5 var(--body)}
+.t-caption{font:300 13px/1.6 var(--body)}
+.green{color:var(--green)}
 .center{text-align:center}
-.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
-/* Button */
-.btn{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:999px;background:var(--green);color:#fff;font:400 16px/1 var(--body);text-decoration:none;transition:background .2s,transform .2s}
-.btn:hover{background:#45534f}
+/* ---------- Button ---------- */
+.btn{display:inline-flex;align-items:center;gap:8px;height:40px;padding:8px 16px;border-radius:999px;background:var(--green);color:#fff;font:400 16px/1.5 var(--body);text-decoration:none;white-space:nowrap;transition:background .2s,transform .2s}
+.btn:hover{background:#45534d}
 .btn:active{transform:scale(.98)}
 .btn svg{width:12px;height:12px}
 
@@ -66,143 +77,153 @@ a{color:inherit}
 .nav{position:absolute;inset:0 0 auto;height:72px;display:flex;align-items:center;justify-content:center;z-index:5}
 .nav img{width:200px;height:auto}
 .hero{position:relative;height:528px;background:#1a1a1a url(assets/hero.webp) center/cover no-repeat}
-.intro{padding:120px 0 120px;text-align:center}
-.intro h1{font:400 64px/1.1 var(--display);color:var(--green);text-transform:uppercase;max-width:990px;margin-inline:auto}
-.intro p{max-width:516px;margin:24px auto 0}
+
+/* ---------- Intro ---------- */
+.intro{padding:120px 0 0;text-align:center}
+.intro h1{max-width:990px;margin-inline:auto}
+.intro .t-body{max-width:516px;margin:24px auto 0}
+.intro .t-body span + span{margin-left:.25em}
 
 /* ---------- Locations ---------- */
-.locations{padding:0 0 var(--pad-section);overflow:hidden}
-.locations header{display:grid;gap:16px;text-align:center}
-.locations header .h2{margin-top:-4px}
-.locations header p{margin-top:0}
-.loc-track{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:64px;padding:80px 64px 0;scrollbar-width:none;margin-top:0}
+.locations{padding:120px 0;overflow:hidden}
+.loc-head{display:grid;gap:16px;text-align:center}
+.loc-head .t-hlabel,.loc-head .t-h2{color:var(--green)}
+.loc-head .t-body{color:#000}
+.loc-head .titles{display:grid;gap:16px}
+.loc-track{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:64px;padding:80px 64px 0;scrollbar-width:none}
 .loc-track::-webkit-scrollbar{display:none}
-.loc-card{position:relative;flex:0 0 453px;aspect-ratio:453/575;border-radius:16px;overflow:hidden;scroll-snap-align:start;text-align:center;color:#fff;background:#2a2a2a}
+.loc-card{position:relative;flex:0 0 453px;aspect-ratio:453/575;border-radius:24px;overflow:hidden;scroll-snap-align:start;text-align:center;color:#fff;background:#b6b6b6}
 .loc-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
 .loc-card:hover img{transform:scale(1.03)}
-.loc-card .meta{position:absolute;inset:auto 0 0;padding:0 24px 48px;display:grid;gap:4px}
-.loc-card .name{font:400 40px/1.2 var(--display);margin-bottom:24px}
+.loc-card .meta{position:absolute;inset:auto 0 0;padding:0 24px 40px;display:grid;gap:4px}
+.loc-card .name{font:400 40px/1.2 var(--display);margin-bottom:12px}
 .loc-card .addr{font:400 16px/1.5 var(--body)}
 .loc-card .mrt{font:300 13px/1.6 var(--body)}
-.loc-card .cue{position:absolute;top:20px;right:20px;font:400 11px/1.4 var(--label);letter-spacing:.2em;text-transform:uppercase;background:rgba(26,26,26,.45);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:8px 12px;border-radius:999px;opacity:0;transform:translateY(-4px);transition:.25s}
+.loc-card .cue{position:absolute;top:20px;right:20px;font:400 11px/1.4 var(--label);letter-spacing:.2em;text-transform:uppercase;background:rgba(26,26,26,.45);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:6px 12px;border-radius:999px;opacity:0;transform:translateY(-4px);transition:.25s}
 .loc-card:hover .cue,.loc-card:focus-visible .cue{opacity:1;transform:none}
 .arrows{display:flex;gap:16px;justify-content:flex-end;padding:80px 64px 0}
-.arrow{width:32px;height:32px;border-radius:50%;color:var(--ink);transition:opacity .2s}
+.arrow{width:32px;height:32px;color:var(--green);transition:opacity .2s}
 .arrow svg{width:32px;height:32px}
-.arrow[disabled]{opacity:.35;cursor:default}
+.arrow[disabled]{opacity:.5;cursor:default}
 
 /* ---------- Together, but not alone ---------- */
-.together{background:var(--ink);padding:var(--pad-section) 0}
-.t-card{background:var(--cream);border-radius:var(--radius-card);padding:96px;display:grid;gap:64px}
+.together{background:var(--ink);padding:var(--sec) 0}
+.t-card{background:var(--cream);border-radius:var(--r-card);padding:96px;display:grid;gap:64px}
 .t-intro{display:flex;justify-content:space-between;align-items:center;gap:48px}
 .t-copy{display:grid;gap:32px;max-width:525px}
-.t-copy .h2{font-size:40px}
-.t-copy .body{display:grid;gap:16px;font-size:14px}
+.t-copy .t-h2{color:var(--green)}
 .t-copy .alone{font:400 24px/1.3 var(--body);color:var(--green)}
 .t-photo{flex:0 0 279px;aspect-ratio:1;border-radius:16px;overflow:hidden}
+.t-photo picture,.act-img picture{display:block;width:100%;height:100%}
 .t-photo img{width:100%;height:100%;object-fit:cover}
 .rule{height:1px;background:var(--sage)}
 .stat{display:flex;align-items:center;gap:48px}
 .stat .big{font:400 100px/1 var(--display);color:var(--green);white-space:nowrap}
 .stat .copy{display:grid;gap:16px}
-.stat .lead{font:400 24px/1.5 var(--display)}
-.stat .acc{color:var(--grey);font-size:14px}
-.together .closing{margin-top:80px;font:400 24px/1.5 var(--display);color:var(--cream);text-align:center}
+.stat .lead{color:var(--green)}
+.stat .acc{color:var(--grey-dark)}
+.together .closing{margin-top:48px;color:var(--cream);text-align:center}
 
 /* ---------- How it works ---------- */
-.how{position:relative;min-height:800px;display:grid;place-items:center;background:#2a3a33 url(assets/how_bg.webp) center/cover no-repeat;color:#fff;padding:var(--pad-section) 0}
-.how h2{color:#fff;text-align:center}
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;list-style:none;padding:0;max-width:1022px}
-.steps li{display:flex;align-items:center;gap:16px}
-.steps .num{flex:0 0 80px;height:80px;border:1px solid #fff;border-radius:50%;display:grid;place-items:center;font:400 32px/1 var(--display)}
+.how{min-height:800px;display:grid;place-items:center;background:#2a3a33 url(assets/how_bg.webp) center/cover no-repeat;color:#fff;padding:var(--sec) 0}
+.how .t-h2{text-align:center}
+.steps{display:flex;justify-content:center;gap:24px;margin:48px auto 0;list-style:none;padding:0}
+.steps li{display:flex;align-items:center;gap:16px;width:325px}
+.steps .num{flex:0 0 80px;height:80px;border:2px solid #fff;border-radius:50%;display:grid;place-items:center;font:400 32px/1.2 var(--display)}
 
 /* ---------- Research ---------- */
-.research{padding:var(--pad-section) 0}
-.research header{display:grid;gap:24px;text-align:center}
-.research header p{max-width:560px;margin-inline:auto}
+.research{padding:var(--sec) 0 80px}
+.research header{display:grid;gap:24px;text-align:center;max-width:560px;margin-inline:auto}
+.research header .t-h2{color:var(--green)}
 .evidence{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:72px}
-.q-card,.s-card{border-radius:var(--radius-card);padding:64px;display:grid;align-content:center;min-height:466px}
-.q-card{margin:0;background:#7a3a1a url(assets/research_card.webp) center/cover no-repeat;color:#fff;font:400 24px/1.5 var(--body)}
-.s-card{background:var(--sage);gap:16px}
-.s-card .src{font:400 12px/1.4 var(--display);letter-spacing:.12em;text-transform:uppercase;color:var(--green)}
-.s-card .num{font:400 48px/1.2 var(--body);color:var(--green)}
-.s-card .small{font-weight:500}
-.takeaway{margin-top:24px;background:var(--green);color:#fff;border-radius:var(--radius-card);padding:96px 120px;display:grid;justify-items:center;gap:24px;text-align:center}
-.takeaway .eyebrow{color:rgba(255,255,255,.7)}
-.takeaway .line{font:400 40px/1.25 var(--body);max-width:800px}
+.q-card,.s-card{border-radius:var(--r-card);padding:64px;min-height:512px}
+.q-card{display:grid;align-content:center;background:#7a3a1a url(assets/research_card.webp) center/cover no-repeat;color:#fff;font:400 24px/1.25 var(--body);text-align:center}
+.s-card{background:var(--sage);display:flex;flex-direction:column;justify-content:center;gap:16px}
+.s-card .src{color:var(--green)}
+.s-card .src span{display:block}
+.s-card .src .sep{display:none}
+.s-card .num{color:var(--green)}
+.takeaway{margin-top:24px;background:var(--green);color:#fff;border-radius:var(--r-card);padding:96px 120px;display:flex;flex-direction:column;align-items:center;gap:24px;text-align:center}
+.takeaway .t-hlabel{color:rgba(255,255,255,.7)}
+.takeaway .line{max-width:800px}
 .takeaway .short{width:48px;height:1px;background:rgba(255,255,255,.4)}
-.takeaway p:last-child{max-width:520px;color:rgba(255,255,255,.85)}
+.takeaway .sol{max-width:520px;color:rgba(255,255,255,.85)}
 
 /* ---------- Activities ---------- */
-.activities{padding:0 0 var(--pad-section)}
-.activities > .wrap > .h2{text-align:center;max-width:657px;margin-inline:auto}
-.act{display:grid;grid-template-columns:453px 1fr;gap:88px;align-items:center;margin-top:80px}
-.act:nth-of-type(even){grid-template-columns:1fr 453px}
-.act:nth-of-type(even) .act-img{order:2}
-.act-img{aspect-ratio:453/575;border-radius:16px;overflow:hidden}
+.activities{padding:0 0 var(--sec)}
+.activities > .wrap > .t-h2{text-align:center;max-width:657px;margin-inline:auto;color:var(--green)}
+.act{display:grid;grid-template-columns:453px 1fr;column-gap:87px;align-items:center;margin-top:80px}
+.act.flip{grid-template-columns:1fr 453px}
+.act.flip .act-img{order:2}
+.act-img{aspect-ratio:453/575;border-radius:24px;overflow:hidden;background:#2a2a2a}
 .act-img img{width:100%;height:100%;object-fit:cover}
-.act-copy{display:grid;gap:24px;max-width:514px}
-.act-copy .no{font:400 14px/1.4 var(--display);color:var(--ink)}
-.act-copy h3{font:400 32px/1.3 var(--display);color:var(--green);margin-top:-16px}
-.act-copy .body{display:grid;gap:16px}
+.act-copy{display:grid;gap:16px;max-width:514px}
+.act-copy .no,.act-copy .t-h3{color:var(--green)}
+.act-copy .stack{max-width:457px}
 
-/* ---------- Customer quote ---------- */
-.quote{position:relative;min-height:800px;display:grid;place-items:center;text-align:center;color:#fff;background:linear-gradient(rgba(0,0,0,.2),rgba(0,0,0,.2)),#1a1a1a url(assets/quote_bg.webp) center/cover no-repeat;padding:var(--pad-section) var(--gutter)}
-.quote figure{margin:0;max-width:506px;display:grid;gap:16px}
-.quote .who-label,.quote figcaption{font:400 14px/1.4 var(--label);letter-spacing:.06em}
-.quote figcaption{text-transform:uppercase;letter-spacing:.2em;margin-top:24px}
-.quote blockquote{margin:0;font:400 24px/1.5 var(--display)}
-.dots{position:absolute;bottom:80px;left:50%;transform:translateX(-50%);display:flex;gap:4px}
-.dots span{width:32px;height:6px;border-radius:99px;background:rgba(255,255,255,.8)}
-.dots span:first-child{background:rgba(115,155,152,.8)}
+/* ---------- Customer reviews (slideshow) ---------- */
+.reviews{position:relative;height:800px;overflow:hidden;color:#fff;background:#1a1a1a}
+.slide{position:absolute;inset:0;display:grid;place-items:center;padding:0 24px;opacity:0;visibility:hidden;transition:opacity 1s ease,visibility 1s}
+.slide.active{opacity:1;visibility:visible}
+.slide .bg{position:absolute;inset:0;background-image:var(--bg);background-size:cover;background-position:center;transform:scale(1.04);transition:transform 7s ease}
+.slide.active .bg{transform:scale(1)}
+.slide .shade{position:absolute;inset:0}
+.slide figure{position:relative;max-width:506px;display:grid;gap:16px;text-align:center}
+.slide .who-label{font:400 14px/1 var(--label);letter-spacing:.1em}
+.slide figcaption{margin-top:24px;font:400 14px/1 var(--label);letter-spacing:.2em;text-transform:uppercase}
+.dots{position:absolute;left:50%;bottom:80px;transform:translateX(-50%);display:flex;gap:4px;z-index:2}
+.dot{width:32px;height:6px;border-radius:99px;background:rgba(255,255,255,.8);transition:background .3s}
+.dot[aria-current="true"]{background:rgba(115,155,152,.8)}
+.dot::after{content:"";position:absolute;inset:-12px 0}
+.dot{position:relative}
 
 /* ---------- Pricing ---------- */
-.pricing{padding:var(--pad-section) 0;text-align:center}
+.pricing{padding:var(--sec) 0;text-align:center}
 .pricing header{display:grid;gap:16px}
-.pricing header .eyebrow{font:400 14px/1.4 var(--body);letter-spacing:.1em}
-.table{margin-top:48px;border:1px solid var(--sage);border-radius:16px;overflow:hidden;text-align:left;background:var(--cream)}
+.pricing .eyebrow{font:400 14px/1.4 var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--green)}
+.pricing .t-h2{color:var(--green)}
+.table{margin-top:48px;border:1px solid var(--sage);border-radius:16px;overflow:hidden;text-align:left}
 .table .row{display:grid;grid-template-columns:repeat(3,1fr)}
-.table .row > div{padding:32px 40px;display:grid;align-content:center;gap:4px}
+.table .row > div{padding:32px 40px;display:flex;flex-direction:column;justify-content:center;gap:4px}
 .table .row > div + div{border-left:1px solid var(--sage)}
 .table .head{background:var(--green);color:#fff}
 .table .head > div{padding-block:20px;font-weight:500}
-.table .head > div + div{border-left-color:#73827d}
-.table .pax{font-size:24px;line-height:1.3}
+.table .head > div + div{border-left-color:var(--cell-line)}
+.table .pax{font:400 24px/1.3 var(--body)}
 .table .price{font:400 32px/1.3 var(--body);color:var(--green)}
-.table .ext{font-size:14px;color:var(--grey)}
+.table .ext{font:400 14px/1.5 var(--body);color:var(--grey)}
 .table .lbl{display:none}
-.footnote{max-width:640px;margin:24px auto 0;font-size:14px;color:var(--grey)}
+.footnote{max-width:640px;margin:24px auto 0;font:400 14px/1.5 var(--body);color:var(--grey)}
 .pricing .btn{margin-top:48px}
 
 /* ---------- Guarantee ---------- */
-.guarantee{min-height:800px;display:grid;place-items:center;text-align:center;color:#fff;background:#5a2a14 url(assets/guarantee_bg.webp) center/cover no-repeat;padding:var(--pad-section) var(--gutter)}
-.guarantee .inner{display:grid;justify-items:center;gap:0;max-width:487px}
-.guarantee h2{color:#fff}
-.guarantee img{width:59px;margin:54px 0;opacity:.9}
-.guarantee p + p{margin-top:16px}
+.guarantee{min-height:800px;display:grid;place-items:center;text-align:center;color:#fff;background:#5a2a14 url(assets/guarantee_bg.webp) center/cover no-repeat;padding:var(--sec) 24px}
+.guarantee .inner{display:flex;flex-direction:column;align-items:center;gap:24px;max-width:586px}
+.guarantee .stack{max-width:487px}
+.guarantee img{width:59px;opacity:.9}
 
 /* ---------- FAQ ---------- */
-.faq{position:relative;padding:128px var(--gutter);background:#2a2a2a url(assets/faq_bg.webp) center/cover no-repeat}
+.faq{padding:128px 24px;background:#2a2a2a url(assets/faq_bg.webp) center/cover no-repeat}
 .faq-card{max-width:914px;margin-inline:auto;background:var(--green);border-radius:24px;padding:80px;display:grid;grid-template-columns:353px 353px;justify-content:space-between;gap:48px}
-.faq-card h2{color:var(--sage);font:400 40px/1.2 var(--display)}
+.faq-card .t-h2{color:var(--sage)}
 .faq-list{display:grid;gap:40px;align-self:start}
 .faq-item{border-bottom:1px solid rgba(255,255,255,.6);padding-bottom:16px}
-.faq-q{width:100%;display:flex;gap:24px;align-items:flex-start;justify-content:space-between;text-align:left;font:400 16px/1.4 var(--display);color:#fff}
+.faq-q{width:100%;display:flex;gap:24px;align-items:flex-start;justify-content:space-between;text-align:left;font:400 16px/1.4 var(--display);color:#fff;transition:color .2s}
 .faq-q svg{flex:0 0 24px;height:24px;transition:transform .3s ease}
+.faq-q[aria-expanded="true"]{color:var(--sage)}
 .faq-q[aria-expanded="true"] svg{transform:rotate(180deg)}
 .faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease}
 .faq-a > div{overflow:hidden}
-.faq-a .inner{padding-top:16px;display:grid;gap:12px;font:400 14px/1.6 var(--body);color:rgba(255,255,255,.85)}
+.faq-a .inner{padding-top:24px;color:#fff}
 .faq-item.open .faq-a{grid-template-rows:1fr}
 
 /* ---------- Sticky booking bar ---------- */
-.book-bar{position:fixed;inset:auto 0 0;z-index:20;background:var(--bar);backdrop-filter:blur(24px) saturate(1.2);-webkit-backdrop-filter:blur(24px) saturate(1.2);color:#fff;transform:translateY(100%);transition:transform .35s ease}
+.book-bar{position:fixed;inset:auto 0 0;z-index:20;background:rgba(57,57,57,.6);backdrop-filter:blur(24px) saturate(1.2);-webkit-backdrop-filter:blur(24px) saturate(1.2);color:#fff;transform:translateY(100%);transition:transform .35s ease}
 .book-bar.show{transform:none}
-.book-bar .in{max-width:618px;margin-inline:auto;min-height:104px;padding:24px var(--gutter);display:flex;align-items:center;justify-content:space-between;gap:16px}
-.book-bar .t{font:400 20px/1.4 var(--display)}
-body{padding-bottom:104px}
+.book-bar .in{max-width:618px;margin-inline:auto;min-height:104px;padding:24px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.book-bar .t{font:400 20px/1.4 var(--display);text-transform:uppercase}
 
-/* ---------- Location modal ---------- */
+/* ---------- Location pop-up ---------- */
 .modal{position:fixed;inset:0;z-index:50;background:var(--ink);color:#fff;overflow-y:auto;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
 .modal.open{opacity:1;visibility:visible}
 .m-top{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:center;height:56px;padding:0 40px;background:var(--ink)}
@@ -214,10 +235,10 @@ body{padding-bottom:104px}
 .m-head{display:grid;gap:16px;transition:opacity .2s}
 .m-head.fade{opacity:0}
 .m-head h2{font:400 40px/1.2 var(--display);color:#fff}
-.m-head .addr{font-size:16px}
-.m-head .mrt{font:300 13px/1.6 var(--body);color:var(--grey-light);margin-top:-12px}
-.tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:40px;padding:0 var(--gutter)}
-.tab{height:26px;padding:0 12px;border:1px solid #fff;border-radius:999px;font:400 12px/24px var(--display);letter-spacing:.06em;text-transform:uppercase;color:#fff;transition:background .2s,color .2s}
+.m-head .addr{font:400 16px/1.5 var(--body)}
+.m-head .mrt{font:300 13px/1.6 var(--body);color:#d4d4d4;margin-top:-12px}
+.tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:40px;padding:0 24px}
+.tab{height:26px;padding:0 12px;border:1px solid #fff;border-radius:999px;font:400 11px/24px var(--display);letter-spacing:.06em;text-transform:uppercase;color:#fff;transition:background .2s,color .2s}
 .tab[aria-selected="true"]{background:#fff;color:var(--ink)}
 .tab:not([aria-selected="true"]):hover{background:rgba(255,255,255,.12)}
 .m-track{display:flex;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:40px;padding:40px 40px 0;scrollbar-width:none;transition:opacity .2s}
@@ -234,88 +255,140 @@ body.lock{overflow:hidden}
 .reveal.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
 
-/* ---------- Tablet ---------- */
+/* ---------- Smaller desktops / tablets ---------- */
 @media (max-width:1100px){
-  .act,.act:nth-of-type(even){grid-template-columns:1fr 1fr;gap:56px}
   .t-card{padding:64px}
+  .act,.act.flip{grid-template-columns:1fr 1fr;column-gap:56px}
   .faq-card{grid-template-columns:1fr;padding:64px}
   .takeaway{padding:80px 64px}
+  .steps{flex-wrap:wrap}
 }
 
-/* ---------- Mobile ---------- */
+/* =========================================================
+   MOBILE (Figma "Mobile – Landing", 390 wide, 4 col / 24 margin / 16 gutter)
+   ========================================================= */
 @media (max-width:767px){
-  :root{--pad-section:80px;--gutter:16px;--radius-card:24px 24px 0 24px}
-  body{font-size:15px;line-height:1.7}
-  .h2{font-size:32px;line-height:1}
-  .eyebrow{font-size:12px}
-  .nav{height:56px}.nav img{width:140px}
-  .hero{height:360px}
-  .intro{padding:56px 0 72px}
-  .intro h1{font-size:32px}
-  .intro p{margin-top:16px}
-  .loc-track{padding:40px var(--gutter) 0;scroll-padding-inline:var(--gutter);gap:12px}
-  .loc-card{flex-basis:78%}
-  .loc-card .name{font-size:32px;line-height:1;margin-bottom:12px}
-  .loc-card .addr{font-size:13px}
-  .loc-card .mrt{font-size:12px;line-height:1.5}
-  .loc-card .meta{padding-bottom:32px}
-  .loc-card .cue{opacity:1;transform:none}
-  .arrows{padding:32px var(--gutter) 0}
-  .t-card{padding:40px 24px;gap:40px}
-  .t-intro{flex-direction:column-reverse;align-items:stretch;gap:32px}
-  .t-photo{flex-basis:auto;aspect-ratio:4/3}
-  .t-copy{gap:24px}
-  .t-copy .h2{font-size:32px}
-  .t-copy .body{font-size:15px}
+  :root{--side:24px;--sec:80px;--ps:12px;--r-card:24px 24px 0 24px}
+  body{font-size:15px;line-height:1.5;padding-bottom:73px}
+  .d-only{display:none}
+  .m-only{display:inline}
+
+  /* Mobile type styles */
+  .t-hero,.t-h1,.t-h2{font-size:32px;line-height:1.1}
+  .t-h3{font-size:22px;line-height:1.2}
+  .t-h4{font-size:20px;line-height:1.3}
+  .t-heading{font-size:15px;line-height:1.4}
+  .t-hlabel{font-size:12px;line-height:1.6}
+  .t-body{font-size:15px;line-height:1.5}
+  .t-caption{font-size:13px}
+
+  .nav{height:56px;align-items:flex-start;padding-top:14px}
+  .nav img{width:140px}
+  .hero{height:360px;background-image:url(assets/m_hero.webp)}
+
+  .intro{padding:56px 0 0}
+  .intro .t-body{margin-top:24px}
+  .intro .t-body span{display:block}
+  .intro .t-body span + span{margin:12px 0 0}
+
+  .locations{padding:80px 0}
+  .loc-head{gap:8px}
+  .loc-head .titles{gap:8px}
+  .loc-head .t-body{color:var(--ink)}
+  .loc-track{padding:32px 24px 0;scroll-padding-inline:24px;gap:12px}
+  .loc-card{flex-basis:304px;border-radius:16px}
+  .loc-card .meta{padding:0 24px 28px}
+  .loc-card .name{font-size:32px;line-height:1.1;margin-bottom:12px}
+  .loc-card .addr{font:300 13px/1.6 var(--body)}
+  .loc-card .mrt{font:300 12px/1.5 var(--body)}
+  .loc-card .cue{opacity:1;transform:none;top:14px;right:14px;font-size:10px}
+  .arrows{padding:32px 16px 0}
+
+  .together{padding:24px 0 80px}
+  .t-card{padding:16px 16px 40px;gap:40px}
+  .t-intro{flex-direction:column-reverse;align-items:stretch;gap:40px}
+  .t-photo{flex-basis:auto;aspect-ratio:auto;height:232px}
+  .t-copy{gap:16px;max-width:none;text-align:center}
+  .t-copy .stack span{display:block;margin-top:var(--ps)}
   .t-copy .alone{font-size:20px}
-  .stat{flex-direction:column;align-items:flex-start;gap:16px}
+  .stat{flex-direction:column;align-items:stretch;gap:16px;text-align:center}
   .stat .big{font-size:72px}
-  .stat .lead{font-size:20px}
-  .together .closing{font-size:20px;margin-top:56px}
-  .how{min-height:0;padding:96px 0}
-  .steps{grid-template-columns:1fr;gap:24px;margin-top:40px;justify-items:start;width:min(320px,100%);margin-inline:auto}
-  .steps .num{flex-basis:64px;height:64px;font-size:22px}
-  .evidence{grid-template-columns:1fr;margin-top:48px;gap:16px}
-  .q-card,.s-card{min-height:0;padding:40px 24px}
-  .q-card{min-height:320px;font-size:20px}
-  .s-card .num{font-size:36px}
-  .takeaway{margin-top:16px;padding:56px 24px}
-  .takeaway .line{font-size:26px}
-  .act,.act:nth-of-type(even){grid-template-columns:1fr;gap:32px;margin-top:56px}
-  .act:nth-of-type(even) .act-img{order:0}
-  .act-img{aspect-ratio:4/5}
-  .act-copy{gap:16px}
-  .act-copy h3{font-size:22px;line-height:1.2;margin-top:-8px}
-  .quote{min-height:600px}
-  .quote blockquote{font-size:20px}
+  .stat .copy{gap:16px}
+  .stat .lead{margin-top:-8px}
+  .together .closing{margin-top:24px}
+
+  .how{min-height:0;padding:96px 0;background-image:url(assets/m_how.webp)}
+  .steps{flex-direction:column;align-items:center;gap:24px;margin-top:40px;padding:0 40px}
+  .steps li{flex-direction:column;width:auto;max-width:262px;gap:16px;text-align:center}
+  .steps .num{flex-basis:64px;width:64px;height:64px;border-width:1px;font-size:22px}
+
+  .research{padding:80px 0}
+  .research .wrap{width:calc(100% - 32px)}
+  .research header{gap:16px}
+  .evidence{grid-template-columns:1fr;gap:16px;margin-top:48px}
+  .q-card,.s-card{min-height:0;padding:40px 24px;text-align:center}
+  .q-card{min-height:320px;font:400 20px/1.5 var(--body);background-image:url(assets/m_research.webp)}
+  .s-card .src{font:400 10px/1.6 var(--display);letter-spacing:.06em}
+  .s-card .src span{display:inline}
+  .s-card .src .sep{display:inline}
+  .s-card .stack span{display:block;margin-top:var(--ps)}
+  .takeaway{margin-top:16px;padding:56px 24px;gap:16px}
+  .takeaway .line{font-size:22px;line-height:1.2}
+
+  .activities{padding:0 0 80px}
+  .act,.act.flip{grid-template-columns:1fr;row-gap:32px;margin-top:56px;text-align:center}
+  .act.flip .act-img{order:0}
+  .act-img{aspect-ratio:342/454;border-radius:19px}
+  .act-copy{max-width:none}
+  .act-copy .stack{max-width:none}
+
+  .reviews{height:600px}
+  .slide{padding:80px 48px}
+  .slide figure{max-width:294px}
+  .slide .who-label{line-height:1.4;letter-spacing:.06em}
+  .slide figcaption{line-height:1.4}
   .dots{bottom:48px}
-  .table{border:0;background:none;display:grid;gap:12px}
+  .slide .bg{background-image:var(--mbg)}
+
+  .pricing{padding:80px 0}
+  .pricing .wrap{width:calc(100% - 32px)}
+  .pricing header{gap:12px}
+  .pricing .eyebrow{font-size:12px}
+  .table{margin-top:32px}
   .table .head{display:none}
-  .table .row{grid-template-columns:1fr 1fr;border:1px solid var(--sage);border-radius:16px;overflow:hidden;background:var(--cream)}
+  .table .row{grid-template-columns:1fr 1fr}
   .table .row > div{padding:20px}
-  .table .row > div:first-child{grid-column:1/-1;background:var(--green);color:#fff;padding:14px 20px;font-size:16px}
+  .table .row > div:first-child{grid-column:1/-1;display:block;background:var(--green);color:#fff;padding:14px 20px;font:400 16px/1.5 var(--body)}
   .table .row > div:nth-child(2){border-left:0}
-  .table .lbl{display:block;font-size:12px;font-weight:500;color:var(--ink);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+  .table .lbl{display:block;font:500 11px/1.4 var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
   .table .price{font-size:26px}
-  .guarantee{min-height:600px}
-  .guarantee img{margin:40px 0}
-  .faq{padding:80px var(--gutter)}
+  .table .ext{font:300 13px/1.6 var(--body);color:var(--grey-dark)}
+  .footnote{margin-top:32px;font:300 13px/1.6 var(--body);color:var(--grey-dark)}
+  .pricing .btn{margin-top:32px}
+
+  .guarantee{min-height:600px;padding:80px 48px;background-image:url(assets/m_guarantee.webp)}
+  .guarantee img{width:42px}
+
+  .faq{padding:80px 24px;background-image:url(assets/m_faq.webp)}
   .faq-card{padding:40px 24px;gap:32px}
-  .faq-card h2{font-size:32px}
-  .faq-q{font-size:15px;line-height:1.6}
   .faq-list{gap:28px}
-  body{padding-bottom:88px}
-  .book-bar .in{min-height:88px;padding:16px var(--gutter)}
-  .book-bar .t{font-size:17px}
-  .book-bar .s{font-size:13px}
-  .m-top{padding:0 var(--gutter)}
+  .faq-q{font-size:15px;gap:16px}
+  .faq-a .inner{padding-top:16px}
+
+  .book-bar .in{min-height:73px;padding:16px 24px}
+  .book-bar .t{font-size:15px;text-transform:none}
+  .book-bar .s{font:300 11px/1.6 var(--body)}
+
+  .m-top{padding:0 16px}
   .m-body{padding:40px 0 56px}
-  .m-head h2{font-size:32px}
-  .m-head .addr{font-size:13px}
-  .m-head .mrt{font-size:12px}
-  .m-track{padding:32px var(--gutter) 0;scroll-padding-inline:var(--gutter);gap:12px}
-  .m-track img{width:78%}
-  .m-arrows{margin-top:40px}
+  .m-head{gap:8px}
+  .m-head h2{font-size:32px;line-height:1.1}
+  .m-head .addr{font:300 13px/1.6 var(--body)}
+  .m-head .mrt{font-size:12px;margin-top:0}
+  .tabs{margin-top:32px;padding:0 16px}
+  .m-track{padding:32px 16px 0;scroll-padding-inline:16px;gap:12px}
+  .m-track img{width:304px}
+  .m-arrows{margin-top:32px}
 }
 </style>
 </head>
@@ -327,16 +400,18 @@ body.lock{overflow:hidden}
   <section class="hero" aria-hidden="true"></section>
 
   <section class="intro wrap">
-    <h1 class="reveal">The coziest date idea to unwind and connect</h1>
-    <p class="reveal">We create the coziest room for the both of you to disconnect from the outside world and enjoy a shared moment together. Be it watching a show, sharing a slow meal or just talking.</p>
+    <h1 class="t-hero reveal">The coziest date idea to unwind and connect</h1>
+    <p class="t-body reveal"><span>We create the coziest room for the both of you to disconnect from the outside world and enjoy a shared moment together.</span><span>Be it watching a show, sharing a slow meal or just talking.</span></p>
   </section>
 
   <!-- Locations -->
   <section class="locations" id="locations" aria-labelledby="loc-title">
-    <header class="wrap reveal">
-      <p class="eyebrow">Be present together</p>
-      <h2 class="h2" id="loc-title">Our Locations</h2>
-      <p>Select to view our rooms of each location</p>
+    <header class="loc-head wrap reveal">
+      <div class="titles">
+        <p class="t-hlabel">Be present together</p>
+        <h2 class="t-h2" id="loc-title">Our Locations</h2>
+      </div>
+      <p class="t-body">Select to view our rooms of each location</p>
     </header>
     <div class="loc-track" id="locTrack"></div>
     <div class="arrows">
@@ -351,37 +426,37 @@ body.lock{overflow:hidden}
       <div class="t-card reveal">
         <div class="t-intro">
           <div class="t-copy">
-            <h2 class="h2" id="tog-title">Together, but NOT<br>with one another.</h2>
-            <div class="body">
-              <p>We spend more than 2 hours a day on our phone. Everyday,</p>
+            <h2 class="t-h2" id="tog-title">Together, but NOT<br class="d-only"> with one another.</h2>
+            <div class="t-body stack">
+              <p>We spend more than 2 hours a day on our phone everyday.</p>
               <p>I get it, Singapore’s a stressful place.</p>
-              <p>He’s replying to whatsapp messages. She’s scrolling through Tiktok or Instagram. You’re beside one another, but in two different places.</p>
+              <p>He’s replying to whatsapp messages. <span>She’s scrolling through Tiktok or Instagram. You’re beside one another, but in two different places.</span></p>
             </div>
             <p class="alone">You’re not alone.</p>
           </div>
-          <div class="t-photo"><img src="assets/together.webp" alt="A couple relaxing on a sofa in a cozy CozyPlace room" loading="lazy"></div>
+          <div class="t-photo"><picture><source media="(max-width:767px)" srcset="assets/m_together.webp"><img src="assets/together.webp" alt="A woman relaxing on a sofa with popcorn in a cozy CozyPlace room" loading="lazy"></picture></div>
         </div>
         <div class="rule" role="presentation"></div>
         <div class="stat">
           <p class="big">1 in 3</p>
           <div class="copy">
-            <p class="lead">couples in Singapore report screen time as a leading cause of arguments.</p>
-            <p class="acc">More accurately, the lack of intentional time together.</p>
+            <p class="lead t-h4">couples in Singapore report screen time as a leading cause of arguments.</p>
+            <p class="acc t-body">More accurately, the lack of intentional time together.</p>
           </div>
         </div>
       </div>
-      <p class="closing reveal">Nobody decides to drift. It just happens one scroll at a time.</p>
+      <p class="closing t-h4 reveal">Nobody decides to drift. It just happens one scroll at a time.</p>
     </div>
   </section>
 
   <!-- How it works -->
   <section class="how" aria-labelledby="how-title">
     <div class="wrap">
-      <h2 class="h2 reveal" id="how-title">How it works</h2>
+      <h2 class="t-h2 reveal" id="how-title">How it works</h2>
       <ol class="steps reveal">
-        <li><span class="num">1</span><span>Make a booking</span></li>
-        <li><span class="num">2</span><span>Show up. Our onsite team will greet and assist you</span></li>
-        <li><span class="num">3</span><span>Unwind &amp; connect with shared activities</span></li>
+        <li><span class="num">1</span><span class="t-body">Make a booking</span></li>
+        <li><span class="num">2</span><span class="t-body">Show up. Our onsite team will greet and assist you</span></li>
+        <li><span class="num">3</span><span class="t-body">Unwind &amp; connect with shared activities</span></li>
       </ol>
     </div>
   </section>
@@ -390,23 +465,25 @@ body.lock{overflow:hidden}
   <section class="research" aria-labelledby="res-title">
     <div class="wrap">
       <header class="reveal">
-        <h2 class="h2" id="res-title">What the research says<br>about time together</h2>
-        <p>Researchers who study couples keep finding the same thing: what counts is intentional time together.</p>
+        <h2 class="t-h2" id="res-title">What the research says about time together</h2>
+        <p class="t-body">Researchers who study couples keep finding the same thing: what counts is intentional time together.</p>
       </header>
       <div class="evidence">
         <blockquote class="q-card reveal">“Sharing the same space isn't the same as spending time together.”</blockquote>
         <div class="s-card reveal">
-          <p class="src">The Gottman Institution · 40+ years of data</p>
-          <p class="num">6 hours a week</p>
-          <p>The  Gottman institution which conducted the longest couple studies with more than 40 years of data found that the less intentional time spend together largely correlates with relationship dissatisfaction. The research further shows that happy couples gave each other about six intentional hours a week.</p>
-          <p class="small">Most of that is small daily moments.</p>
+          <p class="src t-hlabel"><span>The Gottman Institution</span><span class="sep"> · </span><span>40+ years of data</span></p>
+          <p class="num t-h1">6 hours a week</p>
+          <div class="t-body stack">
+            <p>The  Gottman institution which conducted the longest couple studies with more than 40 years of data found that the less intentional time spend together largely correlates with relationship dissatisfaction. <span>The research further shows that happy couples gave each other about six intentional hours a week.</span></p>
+            <p>Most of that is small daily moments.</p>
+          </div>
         </div>
       </div>
       <div class="takeaway reveal">
-        <p class="eyebrow">The takeaway</p>
-        <p class="line">The biggest contribution is<br>a three-hour date, just the two of you.</p>
+        <p class="t-hlabel">The takeaway</p>
+        <p class="line t-h2">The biggest contribution is<br class="d-only"> a three-hour date, just the two of you.</p>
         <span class="short" role="presentation"></span>
-        <p>The best solution for lack of intentional time together is shared activities and genuine conversation. No phones, no interruption.</p>
+        <p class="sol t-body">The best solution for lack of intentional time together is shared activities and genuine conversation. No phones, no interruption.</p>
       </div>
     </div>
   </section>
@@ -414,14 +491,14 @@ body.lock{overflow:hidden}
   <!-- Activities -->
   <section class="activities" aria-labelledby="act-title">
     <div class="wrap">
-      <h2 class="h2 reveal" id="act-title">3 shared activities for intentional time in CozyPlace</h2>
+      <h2 class="t-h2 reveal" id="act-title">3 shared activities for intentional time in CozyPlace</h2>
 
       <article class="act reveal">
-        <div class="act-img"><img src="assets/act1.webp" alt="A couple holding hands while watching a show" loading="lazy"></div>
+        <div class="act-img"><picture><source media="(max-width:767px)" srcset="assets/m_act1.webp"><img src="assets/act1.webp" alt="A couple holding hands while watching a show" loading="lazy"></picture></div>
         <div class="act-copy">
-          <p class="no">01</p>
-          <h3>Watching a show together</h3>
-          <div class="body">
+          <p class="no t-hlabel">01</p>
+          <h3 class="t-h3">Watching a show together</h3>
+          <div class="t-body stack">
             <p>He let out a small scream at that horror jump scare scene. Then you laugh at him for screaming.  Next week, you’re still talking and teasing him about that scene.</p>
             <p>A peer-reviewed study shows that binge watching a movie or series together gives couples a shared social connection. The story becomes a unique couple memory that belongs to just the two of you. Like an inside joke.</p>
             <p>Months later, you'll still remember that horror movie and those memories.</p>
@@ -429,12 +506,12 @@ body.lock{overflow:hidden}
         </div>
       </article>
 
-      <article class="act reveal">
-        <div class="act-img"><img src="assets/act2.webp" alt="A cozy room with a sofa, TV and warm lighting" loading="lazy"></div>
+      <article class="act flip reveal">
+        <div class="act-img"><picture><source media="(max-width:767px)" srcset="assets/m_act2.webp"><img src="assets/act2.webp" alt="A cozy room with a sofa, TV and warm lighting" loading="lazy"></picture></div>
         <div class="act-copy">
-          <p class="no">02</p>
-          <h3>A slow meal without phones and other people</h3>
-          <div class="body">
+          <p class="no t-hlabel">02</p>
+          <h3 class="t-h3">A slow meal without phones and other people</h3>
+          <div class="t-body stack">
             <p>No screens or scrolling halfway through a conversation. No one at the next table. Just the two of you, taking your time.</p>
             <p>People bond over food. Genuine conversations, deep or light, happen naturally in a cozy space.</p>
             <p>We just need to get rid of the phones, the noise and the disturbance, and let it happen. It's that easy.</p>
@@ -443,26 +520,22 @@ body.lock{overflow:hidden}
       </article>
 
       <article class="act reveal">
-        <div class="act-img"><img src="assets/act3.webp" alt="Two hands making a heart shape over a cushion" loading="lazy"></div>
+        <div class="act-img"><picture><source media="(max-width:767px)" srcset="assets/m_act3.webp"><img src="assets/act3.webp" alt="Two hands making a heart shape over a cushion" loading="lazy"></picture></div>
         <div class="act-copy">
-          <p class="no">03</p>
-          <h3>Couple Card game to know more about one another</h3>
-          <div class="body">
-            <p>How well do you really know one another? Time to find out. Find out what his favourite childhood show was, or her idea of a perfect day. Some answers will make you laugh. Some will surprise you, however long you've been together. How deep you go is up to the both of you.</p>
+          <p class="no t-hlabel">03</p>
+          <h3 class="t-h3">Couple Card game to know more about one another</h3>
+          <div class="t-body stack">
+            <p>How well do you really know one another? Time to find out. Find out what his favourite childhood show was, or her idea of a perfect day. Some answers will make you laugh. Some will surprise you, however long you've been together.</p>
           </div>
         </div>
       </article>
     </div>
   </section>
 
-  <!-- Customer quote -->
-  <section class="quote" aria-label="Customer review">
-    <figure class="reveal">
-      <p class="who-label">The Customer</p>
-      <blockquote>“It was very cozy, and comfortable. There was a lot of movie and games options, definitely worth a visit with your friends or partner!”</blockquote>
-      <figcaption>Amanda Tay</figcaption>
-    </figure>
-    <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
+  <!-- Customer reviews slideshow -->
+  <section class="reviews" id="reviews" aria-roledescription="carousel" aria-label="Customer reviews">
+    <div id="slides"></div>
+    <div class="dots" id="dots" role="group" aria-label="Choose a review"></div>
   </section>
 
   <!-- Pricing -->
@@ -470,7 +543,7 @@ body.lock{overflow:hidden}
     <div class="wrap">
       <header class="reveal">
         <p class="eyebrow">3-hour dates for two</p>
-        <h2 class="h2" id="price-title">Our Pricing</h2>
+        <h2 class="t-h2" id="price-title">Our Pricing</h2>
       </header>
       <div class="table reveal" role="table" aria-label="Pricing for a 3-hour session">
         <div class="row head" role="row">
@@ -479,7 +552,7 @@ body.lock{overflow:hidden}
           <div role="columnheader">Weekends &amp; peak</div>
         </div>
         <div class="row" role="row">
-          <div role="rowheader" class="pax">2 pax</div>
+          <div role="rowheader" class="pax">2 pax<span class="m-only"> · 3-hour session</span></div>
           <div role="cell"><span class="lbl">Weekdays</span><span class="price">from $55</span><span class="ext">Extension at $15/hr</span></div>
           <div role="cell"><span class="lbl">Weekends &amp; peak</span><span class="price">$95</span><span class="ext">Extension at $20/hr</span></div>
         </div>
@@ -492,17 +565,19 @@ body.lock{overflow:hidden}
   <!-- Guarantee -->
   <section class="guarantee" aria-labelledby="g-title">
     <div class="inner reveal">
-      <h2 class="h2" id="g-title">The<br>CozyPlace<br>Guarantee</h2>
+      <h2 class="t-h2" id="g-title">The<br> CozyPlace<br> Guarantee</h2>
       <img src="assets/hand.png" alt="" width="59" height="106">
-      <p>To us, coziness is intentional. Every room is made cozy on purpose. If your experience is not cozy enough, tell us within 20 mins of your booking and we’ll give you a full refund.</p>
-      <p>We’re that confident.</p>
+      <div class="t-body stack">
+        <p>To us, coziness is intentional. Every room is made cozy on purpose. If your experience is not cozy enough, tell us within 20 mins of your booking and we’ll give you a full refund.</p>
+        <p>We’re that confident.</p>
+      </div>
     </div>
   </section>
 
   <!-- FAQ -->
   <section class="faq" id="faq" aria-labelledby="faq-title">
     <div class="faq-card reveal">
-      <h2 id="faq-title">FAQ</h2>
+      <h2 class="t-h2" id="faq-title">FAQ</h2>
       <div class="faq-list" id="faqList"></div>
     </div>
   </section>
@@ -549,11 +624,20 @@ const BOOKING_URL = "https://cozyplace.sg/booking-detail";
 const SHARED_PHOTOS = ["pop1","pop2","pop3","pop4","pop5","pop6"].map(n => `assets/${n}.webp`);
 
 const LOCATIONS = [
-  { id:"bencoolen",  name:"Bencoolen",   address:"171 Bencoolen, 03-01, S189641",          mrt:"5 mins walk from Bugis, Bencoolen & Rochor MRT", card:"assets/loc_bencoolen.webp",  photos:SHARED_PHOTOS },
-  { id:"bukit-timah",name:"Bukit Timah", address:"12 Bukit Timah Street #12-01, S340128",  mrt:"5 mins walk from Beauty World MRT",              card:"assets/loc_bukittimah.webp", photos:SHARED_PHOTOS },
-  { id:"jalan-besar",name:"Jalan Besar", address:"316 Jalan Besar, 03-01, S208974",        mrt:"5 mins walk from Farrer Park MRT/ City Sq Mall", card:"assets/loc_jalanbesar.webp", photos:SHARED_PHOTOS },
-  { id:"paya-lebar", name:"Paya Lebar",  address:"72A Geylang Rd, 02-01, S389599",         mrt:"5 mins walk from Paya Lebar MRT, Exit D",        card:"assets/loc_payalebar.webp",  photos:SHARED_PHOTOS },
+  { id:"bencoolen",  name:"Bencoolen",   address:"171 Bencoolen, 03-01, S189641",         mrt:"5 mins walk from Bugis, Bencoolen & Rochor MRT", card:"assets/loc_bencoolen.webp",  photos:SHARED_PHOTOS },
+  { id:"bukit-timah",name:"Bukit Timah", address:"12 Bukit Timah Street #12-01, S340128", mrt:"5 mins walk from Beauty World MRT",              card:"assets/loc_bukittimah.webp", photos:SHARED_PHOTOS },
+  { id:"jalan-besar",name:"Jalan Besar", address:"316 Jalan Besar, 03-01, S208974",       mrt:"5 mins walk from Farrer Park MRT/ City Sq Mall", card:"assets/loc_jalanbesar.webp", photos:SHARED_PHOTOS },
+  { id:"paya-lebar", name:"Paya Lebar",  address:"72A Geylang Rd, 02-01, S389599",        mrt:"5 mins walk from Paya Lebar MRT, Exit D",        card:"assets/loc_payalebar.webp",  photos:SHARED_PHOTOS },
 ];
+
+// Customer review slideshow: one entry per slide. `shade` darkens the photo (0–1).
+const REVIEW_TEXT = "“It was very cozy, and comfortable. There was a lot of movie and games options, definitely worth a visit with your friends or partner!”";
+const REVIEWS = [
+  { label:"The Customer", quote:REVIEW_TEXT, name:"Amanda Tay", bg:"assets/quote1.webp", mbg:"assets/m_quote1.webp", shade:0 },
+  { label:"The Customer", quote:REVIEW_TEXT, name:"Amanda Tay", bg:"assets/quote2.webp", mbg:"assets/m_quote2.webp", shade:0 },
+  { label:"The Customer", quote:REVIEW_TEXT, name:"Amanda Tay", bg:"assets/quote3.webp", mbg:"assets/m_quote3.webp", shade:0 },
+];
+const SLIDE_SECONDS = 6;
 
 const FAQS = [
   { q:"What is The CozyPlace Experience?",
@@ -573,6 +657,7 @@ const FAQS = [
    ========================================================= */
 const $ = (s, el=document) => el.querySelector(s);
 const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 document.querySelectorAll(".book-link").forEach(a => a.href = BOOKING_URL);
 
@@ -631,7 +716,6 @@ function render(i, animate){
   current = i;
   history.replaceState(null, "", "#location-" + l.id);
 }
-
 function openModal(i){
   lastFocus = document.activeElement;
   render(i, false);
@@ -646,7 +730,6 @@ function closeModal(){
   history.replaceState(null, "", location.pathname + location.search);
   lastFocus?.focus();
 }
-
 locTrack.addEventListener("click", e => { const c = e.target.closest(".loc-card"); if (c) openModal(+c.dataset.i); });
 mTabs.addEventListener("click", e => { const t = e.target.closest(".tab"); if (t && +t.dataset.i !== current) render(+t.dataset.i, true); });
 mTabs.addEventListener("keydown", e => {
@@ -660,25 +743,68 @@ $("#mClose").addEventListener("click", closeModal);
 document.addEventListener("keydown", e => {
   if (!modal.classList.contains("open")) return;
   if (e.key === "Escape") closeModal();
-  if (e.key === "Tab") { // keep focus inside the pop-up
+  if (e.key === "Tab") {
     const f = [...modal.querySelectorAll("button:not([disabled]),a[href]")].filter(x => x.tabIndex !== -1 || x.matches('[aria-selected="true"]'));
     const first = f[0], last = f[f.length-1];
     if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
     else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
   }
 });
-// Deep link, e.g. index.html#location-paya-lebar
 const deep = location.hash.match(/^#location-(.+)$/);
 if (deep) { const i = LOCATIONS.findIndex(l => l.id === deep[1]); if (i > -1) openModal(i); }
 
+/* --- Customer review slideshow --- */
+const slidesEl = $("#slides"), dotsEl = $("#dots"), reviewsEl = $("#reviews");
+slidesEl.innerHTML = REVIEWS.map((r, i) => `
+  <div class="slide${i === 0 ? " active" : ""}" role="group" aria-roledescription="slide" aria-label="${i+1} of ${REVIEWS.length}" ${i ? 'aria-hidden="true"' : ""}>
+    <div class="bg" style="--bg:url('${r.bg}');--mbg:url('${r.mbg}')"></div>
+    <div class="shade" style="background:rgba(0,0,0,${r.shade || 0})"></div>
+    <figure>
+      <p class="who-label">${esc(r.label)}</p>
+      <blockquote class="t-h4">${esc(r.quote)}</blockquote>
+      <figcaption>${esc(r.name)}</figcaption>
+    </figure>
+  </div>`).join("");
+dotsEl.innerHTML = REVIEWS.map((_, i) => `<button class="dot" aria-label="Show review ${i+1}"${i === 0 ? ' aria-current="true"' : ""}></button>`).join("");
+const slides = [...slidesEl.children], dots = [...dotsEl.children];
+// Rotates on its own while on screen; stops for good once the visitor picks a slide
+// (dot, swipe or keyboard), so they're never fighting the timer.
+let slideIdx = 0, timer = null, userTookOver = false, onScreen = false;
+function goTo(i){
+  slideIdx = (i + slides.length) % slides.length;
+  slides.forEach((s, n) => { s.classList.toggle("active", n === slideIdx); s.setAttribute("aria-hidden", n !== slideIdx); });
+  dots.forEach((d, n) => d.setAttribute("aria-current", n === slideIdx));
+}
+function stop(){ clearInterval(timer); timer = null; }
+function play(){
+  stop();
+  if (reduceMotion || userTookOver || !onScreen || document.hidden) return;
+  timer = setInterval(() => goTo(slideIdx + 1), SLIDE_SECONDS * 1000);
+}
+function choose(i){ userTookOver = true; stop(); goTo(i); }
+dots.forEach((d, i) => d.addEventListener("click", () => choose(i)));
+dotsEl.addEventListener("keydown", e => {
+  if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+  e.preventDefault(); choose(slideIdx + (e.key === "ArrowRight" ? 1 : -1)); dots[slideIdx].focus();
+});
+let touchX = null;
+reviewsEl.addEventListener("touchstart", e => { touchX = e.touches[0].clientX; }, {passive:true});
+reviewsEl.addEventListener("touchend", e => {
+  if (touchX === null) return;
+  const dx = e.changedTouches[0].clientX - touchX; touchX = null;
+  if (Math.abs(dx) > 40) choose(slideIdx + (dx < 0 ? 1 : -1));
+});
+new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; play(); }, {threshold:.3}).observe(reviewsEl);
+document.addEventListener("visibilitychange", play);
+
 /* --- FAQ accordion (one open at a time) --- */
-const chevron = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6.5 9.5 12 15l5.5-5.5" stroke="#fff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const chevron = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6.5 9.5 12 15l5.5-5.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 const faqList = $("#faqList");
 faqList.innerHTML = FAQS.map((f, i) => {
   const paras = f.a.split(/\n\n+/).map(p => `<p>${esc(p).replace(/\n/g, "<br>")}</p>`).join("");
   return `<div class="faq-item">
     <h3><button class="faq-q" id="q${i}" aria-expanded="false" aria-controls="a${i}"><span>${esc(f.q)}</span>${chevron}</button></h3>
-    <div class="faq-a" id="a${i}" role="region" aria-labelledby="q${i}"><div><div class="inner">${paras}</div></div></div>
+    <div class="faq-a" id="a${i}" role="region" aria-labelledby="q${i}"><div><div class="inner t-body stack">${paras}</div></div></div>
   </div>`;
 }).join("");
 faqList.addEventListener("click", e => {
@@ -690,7 +816,7 @@ faqList.addEventListener("click", e => {
   if (opening) { item.classList.add("open"); btn.setAttribute("aria-expanded", "true"); }
 });
 
-/* --- Sticky booking bar: appears after the hero, hides over the pricing button --- */
+/* --- Sticky booking bar: appears after the hero --- */
 const bar = $("#bookBar");
 const toggleBar = () => bar.classList.toggle("show", window.scrollY > 480);
 window.addEventListener("scroll", toggleBar, {passive:true}); toggleBar();
