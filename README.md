@@ -7,7 +7,7 @@ Open `index.html` in a browser to preview. There's no build step.
 - **Locations**: clicking a location card opens that outlet's pop-up. The tabs inside switch outlets without closing it. Close with the Close button or Esc.
   Deep links work, e.g. `index.html#location-paya-lebar`.
 - **FAQ**: an accordion. Only one answer is open at a time.
-- **Customer reviews**: a slideshow that rotates every 6 seconds while on screen. Visitors can pick a slide with the dots, arrow keys or a swipe, which stops the auto-rotation.
+- **Customer reviews**: a slideshow that rotates every 1.4 seconds while on screen. Visitors can pick a slide with the dots, arrow keys or a swipe, which stops the auto-rotation.
 - **Booking bar**: a sticky "Find Your CozyPlace" bar appears after you scroll past the hero.
 - Every "Book" button goes to `https://cozyplace.sg/booking-detail`.
 

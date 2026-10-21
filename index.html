@@ -163,9 +163,9 @@ a{color:inherit}
 
 /* ---------- Customer reviews (slideshow) ---------- */
 .reviews{position:relative;height:800px;overflow:hidden;color:#fff;background:#1a1a1a}
-.slide{position:absolute;inset:0;display:grid;place-items:center;padding:0 24px;opacity:0;visibility:hidden;transition:opacity 1s ease,visibility 1s}
+.slide{position:absolute;inset:0;display:grid;place-items:center;padding:0 24px;opacity:0;visibility:hidden;transition:opacity .6s ease,visibility .6s}
 .slide.active{opacity:1;visibility:visible}
-.slide .bg{position:absolute;inset:0;background-image:var(--bg);background-size:cover;background-position:center;transform:scale(1.04);transition:transform 7s ease}
+.slide .bg{position:absolute;inset:0;background-image:var(--bg);background-size:cover;background-position:center;transform:scale(1.04);transition:transform 2s ease}
 .slide.active .bg{transform:scale(1)}
 .slide .shade{position:absolute;inset:0}
 .slide figure{position:relative;max-width:506px;display:grid;gap:16px;text-align:center}
@@ -250,6 +250,7 @@ a{color:inherit}
 .m-arrows{display:flex;justify-content:center;gap:48px;margin-top:clamp(16px,5vh,64px)}
 .m-arrows .arrow{color:#fff}
 body.lock{overflow:hidden}
+.modal:focus{outline:none}
 
 /* Very short screens (phone turned sideways): compact pop-up header */
 @media (max-height:480px){
@@ -289,9 +290,10 @@ body.lock{overflow:hidden}
   .m-only{display:inline}
 
   /* Mobile type styles */
-  .t-hero,.t-h1,.t-h2{font-size:32px;line-height:1.1}
-  .t-h3{font-size:22px;line-height:1.2}
-  .t-h4{font-size:20px;line-height:1.3}
+  .t-hero{font-size:32px;line-height:1.1}
+  .t-h1,.t-h2{font-size:22px;line-height:1.2}
+  .t-h3{font-size:20px;line-height:1.2}
+  .t-h4{font-size:20px;line-height:1.2}
   .t-heading{font-size:15px;line-height:1.4}
   .t-hlabel{font-size:12px;line-height:1.6}
   .t-body{font-size:15px;line-height:1.5}
@@ -306,13 +308,13 @@ body.lock{overflow:hidden}
   .intro .t-body span{display:block}
   .intro .t-body span + span{margin:12px 0 0}
 
-  .locations{padding:80px 0}
+  .locations{padding:124px 0 80px}
   .loc-head{gap:8px}
   .loc-head .titles{gap:8px}
   .loc-head .t-body{color:var(--ink)}
   .loc-track{padding:32px 24px 0;scroll-padding-inline:24px;gap:12px}
   .loc-card{flex-basis:304px;border-radius:16px}
-  .loc-card .meta{padding:0 24px 28px}
+  .loc-card .meta{padding:0 24px 40px}
   .loc-card .name{font-size:32px;line-height:1.1;margin-bottom:12px}
   .loc-card .addr{font:300 13px/1.6 var(--body)}
   .loc-card .mrt{font:300 12px/1.5 var(--body)}
@@ -327,7 +329,8 @@ body.lock{overflow:hidden}
   .t-copy .stack span{display:block;margin-top:var(--ps)}
   .t-copy .alone{font-size:20px}
   .stat{flex-direction:column;align-items:stretch;gap:16px;text-align:center}
-  .stat .big{font-size:72px}
+  .stat .big{font-size:50px}
+  .stat{padding:0 8px}
   .stat .copy{gap:16px}
   .stat .lead{margin-top:-8px}
   .together .closing{margin-top:24px}
@@ -338,14 +341,11 @@ body.lock{overflow:hidden}
   .steps .num{flex-basis:64px;width:64px;height:64px;border-width:1px;font-size:22px}
 
   .research{padding:80px 0}
-  .research .wrap{width:calc(100% - 32px)}
   .research header{gap:16px}
   .evidence{grid-template-columns:1fr;gap:16px;margin-top:48px}
   .q-card,.s-card{min-height:0;padding:40px 24px;text-align:center}
-  .q-card{min-height:320px;font:400 20px/1.5 var(--body);background-image:url(assets/m_research.webp)}
+  .q-card{min-height:320px;font:400 20px/1.3 var(--body);background-image:url(assets/m_research.webp)}
   .s-card .src{font:400 10px/1.6 var(--display);letter-spacing:.06em}
-  .s-card .src span{display:inline}
-  .s-card .src .sep{display:inline}
   .s-card .stack span{display:block;margin-top:var(--ps)}
   .takeaway{margin-top:16px;padding:56px 24px;gap:16px}
   .takeaway .line{font-size:22px;line-height:1.2}
@@ -366,10 +366,9 @@ body.lock{overflow:hidden}
   .slide .bg{background-image:var(--mbg)}
 
   .pricing{padding:80px 0}
-  .pricing .wrap{width:calc(100% - 32px)}
   .pricing header{gap:12px}
   .pricing .eyebrow{font-size:12px}
-  .table{margin-top:32px}
+  .table{margin-top:24px}
   .table .head{display:none}
   .table .row{grid-template-columns:1fr 1fr}
   .table .row > div{padding:20px}
@@ -378,14 +377,15 @@ body.lock{overflow:hidden}
   .table .lbl{display:block;font:500 11px/1.4 var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
   .table .price{font-size:26px}
   .table .ext{font:300 13px/1.6 var(--body);color:var(--grey-dark)}
-  .footnote{margin-top:32px;font:300 13px/1.6 var(--body);color:var(--grey-dark)}
-  .pricing .btn{margin-top:32px}
+  .footnote{margin-top:24px;font:300 13px/1.6 var(--body);color:var(--grey-dark)}
+  .pricing .btn{margin-top:24px}
 
   .guarantee{min-height:600px;padding:80px 48px;background-image:url(assets/m_guarantee.webp)}
   .guarantee img{width:42px}
 
   .faq{padding:80px 24px;background-image:url(assets/m_faq.webp)}
   .faq-card{padding:40px 24px;gap:32px}
+  .faq-card .t-h2{font-size:32px;line-height:1.1}
   .faq-list{gap:28px}
   .faq-q{font-size:15px;gap:16px}
   .faq-a .inner{padding-top:16px}
@@ -607,7 +607,7 @@ body.lock{overflow:hidden}
 </aside>
 
 <!-- Location pop-up -->
-<div class="modal" id="locModal" role="dialog" aria-modal="true" aria-labelledby="mName" aria-hidden="true">
+<div class="modal" id="locModal" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="mName" aria-hidden="true">
   <div class="m-top">
     <span class="t">Our Locations</span>
     <button class="m-close" id="mClose"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 3l10 10M3 13 13 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Close</button>
@@ -651,7 +651,7 @@ const REVIEWS = [
   { label:"The Customer", quote:REVIEW_TEXT, name:"Amanda Tay", bg:"assets/quote2.webp", mbg:"assets/m_quote2.webp", shade:0 },
   { label:"The Customer", quote:REVIEW_TEXT, name:"Amanda Tay", bg:"assets/quote3.webp", mbg:"assets/m_quote3.webp", shade:0 },
 ];
-const SLIDE_SECONDS = 6;
+const SLIDE_SECONDS = 1.4;
 
 const FAQS = [
   { q:"What is The CozyPlace Experience?",
@@ -735,7 +735,7 @@ function openModal(i){
   render(i, false);
   modal.classList.add("open"); modal.setAttribute("aria-hidden", "false");
   document.body.classList.add("lock");
-  setTimeout(() => $("#mClose").focus(), 50);
+  setTimeout(() => modal.focus({preventScroll:true}), 50);
 }
 function closeModal(){
   modal.classList.remove("open"); modal.setAttribute("aria-hidden", "true");
@@ -759,7 +759,7 @@ document.addEventListener("keydown", e => {
   if (e.key === "Tab") {
     const f = [...modal.querySelectorAll("button:not([disabled]),a[href]")].filter(x => x.tabIndex !== -1 || x.matches('[aria-selected="true"]'));
     const first = f[0], last = f[f.length-1];
-    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    if (e.shiftKey && (document.activeElement === first || document.activeElement === modal)) { e.preventDefault(); last.focus(); }
     else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
   }
 });
