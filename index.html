@@ -52,10 +52,11 @@ a{color:inherit}
 :focus-visible{outline:2px solid var(--teal);outline-offset:3px}
 .wrap{width:min(var(--content),100% - 2*var(--side));margin-inline:auto}
 .m-only{display:none}
+br.m-br{display:none}
 .stack > * + *{margin-top:var(--ps)}
 
 /* ---------- Type scale (Desktop styles) ---------- */
-.t-hero{font:400 64px/1.1 var(--display);text-transform:uppercase;color:var(--green)}
+.t-hero{font:400 54px/1.2 var(--display);text-transform:uppercase;color:var(--green)}
 .t-h1{font:400 52px/1 var(--display)}
 .t-h2{font:400 40px/1.2 var(--display)}
 .t-h3{font:400 32px/1.2 var(--display)}
@@ -288,6 +289,7 @@ body.lock{overflow:hidden}
   body{font-size:15px;line-height:1.5;padding-bottom:73px}
   .d-only{display:none}
   .m-only{display:inline}
+  br.m-br{display:inline}
 
   /* Mobile type styles */
   .t-hero{font-size:32px;line-height:1.1}
@@ -441,7 +443,7 @@ body.lock{overflow:hidden}
       <div class="t-card reveal">
         <div class="t-intro">
           <div class="t-copy">
-            <h2 class="t-h2" id="tog-title">Together, but NOT<br class="d-only"> with one another.</h2>
+            <h2 class="t-h2" id="tog-title">Together, but NOT<br> with one another.</h2>
             <div class="t-body stack">
               <p>We spend more than 2 hours a day on our phone everyday.</p>
               <p>I get it, Singapore’s a stressful place.</p>
@@ -480,7 +482,7 @@ body.lock{overflow:hidden}
   <section class="research" aria-labelledby="res-title">
     <div class="wrap">
       <header class="reveal">
-        <h2 class="t-h2" id="res-title">What the research says about time together</h2>
+        <h2 class="t-h2" id="res-title">What the research says<br class="m-br"> about time together</h2>
         <p class="t-body">Researchers who study couples keep finding the same thing: what counts is intentional time together.</p>
       </header>
       <div class="evidence">
@@ -506,13 +508,13 @@ body.lock{overflow:hidden}
   <!-- Activities -->
   <section class="activities" aria-labelledby="act-title">
     <div class="wrap">
-      <h2 class="t-h2 reveal" id="act-title">3 shared activities for intentional time in CozyPlace</h2>
+      <h2 class="t-h2 reveal" id="act-title">3 shared activities<br class="m-br"> for intentional time<br class="m-br"> in CozyPlace</h2>
 
       <article class="act reveal">
         <div class="act-img"><picture><source media="(max-width:767px)" srcset="assets/m_act1.webp"><img src="assets/act1.webp" alt="A couple holding hands while watching a show" loading="lazy"></picture></div>
         <div class="act-copy">
           <p class="no t-hlabel">01</p>
-          <h3 class="t-h3">Watching a show together</h3>
+          <h3 class="t-h3">Watching a<br class="m-br"> show together</h3>
           <div class="t-body stack">
             <p>He let out a small scream at that horror jump scare scene. Then you laugh at him for screaming.  Next week, you’re still talking and teasing him about that scene.</p>
             <p>A peer-reviewed study shows that binge watching a movie or series together gives couples a shared social connection. The story becomes a unique couple memory that belongs to just the two of you. Like an inside joke.</p>
@@ -525,7 +527,7 @@ body.lock{overflow:hidden}
         <div class="act-img"><picture><source media="(max-width:767px)" srcset="assets/m_act2.webp"><img src="assets/act2.webp" alt="A cozy room with a sofa, TV and warm lighting" loading="lazy"></picture></div>
         <div class="act-copy">
           <p class="no t-hlabel">02</p>
-          <h3 class="t-h3">A slow meal without phones and other people</h3>
+          <h3 class="t-h3">A slow meal without<br class="m-br"> phones and other people</h3>
           <div class="t-body stack">
             <p>No screens or scrolling halfway through a conversation. No one at the next table. Just the two of you, taking your time.</p>
             <p>People bond over food. Genuine conversations, deep or light, happen naturally in a cozy space.</p>
@@ -538,7 +540,7 @@ body.lock{overflow:hidden}
         <div class="act-img"><picture><source media="(max-width:767px)" srcset="assets/m_act3.webp"><img src="assets/act3.webp" alt="Two hands making a heart shape over a cushion" loading="lazy"></picture></div>
         <div class="act-copy">
           <p class="no t-hlabel">03</p>
-          <h3 class="t-h3">Couple Card game to know more about one another</h3>
+          <h3 class="t-h3">Couple Card game to<br class="m-br"> know more about<br class="m-br"> one another</h3>
           <div class="t-body stack">
             <p>How well do you really know one another? Time to find out. Find out what his favourite childhood show was, or her idea of a perfect day. Some answers will make you laugh. Some will surprise you, however long you've been together.</p>
           </div>
