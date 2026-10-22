@@ -171,6 +171,7 @@ br.m-br{display:none}
 .slide figure{position:relative;max-width:506px;display:grid;gap:16px;text-align:center}
 .slide .who-label{font:400 14px/1.4 var(--display);letter-spacing:.1em;text-transform:uppercase}
 .slide blockquote p + p{margin-top:20px}
+.slide .q-m{display:none}
 .slide figcaption{margin-top:24px;font:400 14px/1 var(--label);letter-spacing:.2em;text-transform:uppercase}
 .dots{position:absolute;left:50%;bottom:80px;transform:translateX(-50%);display:flex;gap:4px;z-index:2}
 .dot{width:32px;height:6px;border-radius:99px;background:rgba(255,255,255,.8);transition:background .3s}
@@ -367,6 +368,8 @@ body.lock{overflow:hidden}
   .slide .who-label{font-size:12px;line-height:1.6;letter-spacing:.1em}
   .slide figcaption{line-height:1.4}
   .dots{bottom:48px}
+  .slide .q-d{display:none}
+  .slide .q-m{display:block}
   .slide .bg{background-image:var(--mbg)}
 
   .pricing{padding:80px 0}
@@ -649,8 +652,9 @@ const LOCATIONS = [
   { id:"paya-lebar", name:"Paya Lebar",  address:"72A Geylang Rd, 02-01, S389599",        mrt:"5 mins walk from Paya Lebar MRT, Exit D",        card:"assets/loc_payalebar.webp",  photos:SHARED_PHOTOS },
 ];
 
-// Customer reviews (from cozyplace.sg Google reviews). One entry per slide;
-// `quote` is a list of paragraphs. `bg`/`mbg` = desktop/mobile background, `shade` darkens it (0–1).
+// Customer reviews (Google reviews; copy as edited in Figma). One entry per slide.
+// `quote` = paragraphs on desktop; `mquote` (optional) = shorter version for mobile.
+// `bg`/`mbg` = desktop/mobile background, `shade` darkens it (0–1).
 const REVIEWS = [
   { label:"Google Reviews", name:"Abdullah Bin Ismail", bg:"assets/quote1.webp", mbg:"assets/m_quote1.webp", shade:0,
     quote:["We had an incredible experience with Cozyplace on the evening of 24th Sept.",
@@ -658,15 +662,15 @@ const REVIEWS = [
            "We're greatful and will return. Thanks CozyPlace!"] },
   { label:"Google Reviews", name:"Nurul Alysha", bg:"assets/quote2.webp", mbg:"assets/m_quote2.webp", shade:0,
     quote:["CozyPlace truly lives up to its name! The atmosphere is warm, inviting, and thoughtfully designed, making it the perfect spot to relax..",
-           "The staff are exceptionally friendly and attentive without being intrusive. Everything—from the décor to the service—feels intentional and comforting.",
-           "CozyPlace makes you feel right at home. Highly recommend"] },
+           "The staff are exceptionally friendly and attentive without being intrusive. Everything—from the décor to the service—feels intentional and comforting."] },
   { label:"Google Reviews", name:"Daryl Kang", bg:"assets/quote3.webp", mbg:"assets/m_quote3.webp", shade:0,
     quote:["Watched a movie at CozyPlace with friends and family and honestly, it’s a good spot. The place is clean, comfy, and very chill. Seating is cozy, sound and screen quality are decent, and it feels private without being awkward.",
-           "Great for families, small groups, or just a relaxed movie night without the crowd.",
-           "Recommended if you want a comfortable, stress-free experience."] },
+           "Great for families, small groups, or just a relaxed movie night without the crowd."],
+    mquote:["The place is clean, comfy, and very chill. Seating is cozy, sound and screen quality are decent, and it feels private without being awkward.",
+            "Great for families, small groups, or just a relaxed movie night without the crowd."] },
 ];
-// Same behaviour as cozyplace.sg: slides sideways (0.7s), loops, every 3s, pauses while hovering the review.
-const SLIDE_SECONDS = 3;
+// Slides sideways (0.7s) and loops like cozyplace.sg; each review stays up long enough to read.
+const SLIDE_SECONDS = 6;
 const SLIDE_SPEED_MS = 700;
 
 const FAQS = [
@@ -790,7 +794,7 @@ const slideHTML = (r, i, clone) => `
     <div class="shade" style="background:rgba(0,0,0,${r.shade || 0})"></div>
     <figure>
       <p class="who-label">${esc(r.label)}</p>
-      <blockquote class="t-h4">${r.quote.map(p => `<p>${esc(p)}</p>`).join("")}</blockquote>
+      ${r.mquote ? `<blockquote class="t-h4 q-d">${r.quote.map(p => `<p>${esc(p)}</p>`).join("")}</blockquote><blockquote class="t-h4 q-m">${r.mquote.map(p => `<p>${esc(p)}</p>`).join("")}</blockquote>` : `<blockquote class="t-h4">${r.quote.map(p => `<p>${esc(p)}</p>`).join("")}</blockquote>`}
       <figcaption>${esc(r.name)}</figcaption>
     </figure>
   </div>`;
