@@ -44,7 +44,9 @@
 
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--cream);color:var(--ink);font:400 16px/1.5 var(--body);-webkit-font-smoothing:antialiased;padding-bottom:104px}
+body{margin:0;background:var(--cream);color:var(--ink);font:400 16px/1.5 var(--body);-webkit-font-smoothing:antialiased}
+/* space under the last section so the floating bar never covers it; black so it reads as the page end */
+.bar-space{height:104px;background:#000}
 img{display:block;max-width:100%}
 h1,h2,h3,p,figure,blockquote{margin:0}
 button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
@@ -86,7 +88,8 @@ br.m-br{display:none}
 .intro .t-body span + span{margin-left:.25em}
 
 /* ---------- Locations ---------- */
-.locations{padding:120px 0;overflow:hidden}
+.locations{padding:56px 0 120px;overflow:hidden}
+.divider{width:83px;height:1.5px;background:#d4d4d4;margin:0 auto 62.5px}
 .loc-head{display:grid;gap:16px;text-align:center}
 .loc-head .t-hlabel,.loc-head .t-h2{color:var(--green)}
 .loc-head .t-body{color:#000}
@@ -160,14 +163,14 @@ br.m-br{display:none}
 .act-copy .stack{max-width:457px}
 
 /* ---------- Customer reviews (slideshow) ---------- */
-.reviews{position:relative;height:800px;overflow:hidden;color:#fff;background:#1a1a1a}
-.slide{position:absolute;inset:0;display:grid;place-items:center;padding:0 24px;opacity:0;visibility:hidden;transition:opacity .6s ease,visibility .6s}
-.slide.active{opacity:1;visibility:visible}
-.slide .bg{position:absolute;inset:0;background-image:var(--bg);background-size:cover;background-position:center;transform:scale(1.04);transition:transform 2s ease}
-.slide.active .bg{transform:scale(1)}
+.reviews{position:relative;height:800px;overflow:hidden;color:#fff;background:#1a1a1a;touch-action:pan-y}
+.slides{display:flex;height:100%;transition:transform .7s ease}
+.slide{position:relative;flex:0 0 100%;height:100%;display:grid;place-items:center;padding:0 24px}
+.slide .bg{position:absolute;inset:0;background-image:var(--bg);background-size:cover;background-position:center}
 .slide .shade{position:absolute;inset:0}
 .slide figure{position:relative;max-width:506px;display:grid;gap:16px;text-align:center}
-.slide .who-label{font:400 14px/1 var(--label);letter-spacing:.1em}
+.slide .who-label{font:400 14px/1.4 var(--display);letter-spacing:.1em;text-transform:uppercase}
+.slide blockquote p + p{margin-top:1em}
 .slide figcaption{margin-top:24px;font:400 14px/1 var(--label);letter-spacing:.2em;text-transform:uppercase}
 .dots{position:absolute;left:50%;bottom:80px;transform:translateX(-50%);display:flex;gap:4px;z-index:2}
 .dot{width:32px;height:6px;border-radius:99px;background:rgba(255,255,255,.8);transition:background .3s}
@@ -283,7 +286,8 @@ body.lock{overflow:hidden}
    ========================================================= */
 @media (max-width:767px){
   :root{--side:24px;--sec:80px;--ps:12px;--r-card:24px 24px 0 24px}
-  body{font-size:15px;line-height:1.5;padding-bottom:73px}
+  body{font-size:15px;line-height:1.5}
+  .bar-space{height:73px}
   .d-only{display:none}
   .m-only{display:inline}
   br.m-br{display:inline}
@@ -307,7 +311,8 @@ body.lock{overflow:hidden}
   .intro .t-body span{display:block}
   .intro .t-body span + span{margin:12px 0 0}
 
-  .locations{padding:124px 0 80px}
+  .locations{padding:65px 0 80px}
+  .divider{margin-bottom:57.5px}
   .loc-head{gap:8px}
   .loc-head .titles{gap:8px}
   .loc-head .t-body{color:var(--ink)}
@@ -355,10 +360,11 @@ body.lock{overflow:hidden}
   .act-copy{max-width:none}
   .act-copy .stack{max-width:none}
 
-  .reviews{height:600px}
-  .slide{padding:80px 48px}
+  .reviews{height:auto}
+  .slides{min-height:600px}
+  .slide{height:auto;padding:80px 48px 104px}
   .slide figure{max-width:294px}
-  .slide .who-label{line-height:1.4;letter-spacing:.06em}
+  .slide .who-label{font-size:12px;line-height:1.6;letter-spacing:.1em}
   .slide figcaption{line-height:1.4}
   .dots{bottom:48px}
   .slide .bg{background-image:var(--mbg)}
@@ -419,6 +425,7 @@ body.lock{overflow:hidden}
 
   <!-- Locations -->
   <section class="locations" id="locations" aria-labelledby="loc-title">
+    <div class="divider" role="presentation"></div>
     <header class="loc-head wrap reveal">
       <div class="titles">
         <p class="t-hlabel">Be present together</p>
@@ -594,6 +601,7 @@ body.lock{overflow:hidden}
     </div>
   </section>
 </main>
+<div class="bar-space" aria-hidden="true"></div>
 
 <!-- Sticky booking bar -->
 <aside class="book-bar" id="bookBar" aria-label="Book a room">
@@ -641,14 +649,25 @@ const LOCATIONS = [
   { id:"paya-lebar", name:"Paya Lebar",  address:"72A Geylang Rd, 02-01, S389599",        mrt:"5 mins walk from Paya Lebar MRT, Exit D",        card:"assets/loc_payalebar.webp",  photos:SHARED_PHOTOS },
 ];
 
-// Customer review slideshow: one entry per slide. `shade` darkens the photo (0–1).
-const REVIEW_TEXT = "“It was very cozy, and comfortable. There was a lot of movie and games options, definitely worth a visit with your friends or partner!”";
+// Customer reviews (from cozyplace.sg Google reviews). One entry per slide;
+// `quote` is a list of paragraphs. `bg`/`mbg` = desktop/mobile background, `shade` darkens it (0–1).
 const REVIEWS = [
-  { label:"The Customer", quote:REVIEW_TEXT, name:"Amanda Tay", bg:"assets/quote1.webp", mbg:"assets/m_quote1.webp", shade:0 },
-  { label:"The Customer", quote:REVIEW_TEXT, name:"Amanda Tay", bg:"assets/quote2.webp", mbg:"assets/m_quote2.webp", shade:0 },
-  { label:"The Customer", quote:REVIEW_TEXT, name:"Amanda Tay", bg:"assets/quote3.webp", mbg:"assets/m_quote3.webp", shade:0 },
+  { label:"Google Reviews", name:"Abdullah Bin Ismail", bg:"assets/quote1.webp", mbg:"assets/m_quote1.webp", shade:0,
+    quote:["We had an incredible experience with Cozyplace on the evening of 24th Sept.",
+           "The service was great as we were greeted by a friendly staff. Our room was spacious and cozy.",
+           "We're greatful and will return. Thanks CozyPlace!"] },
+  { label:"Google Reviews", name:"Nurul Alysha", bg:"assets/quote2.webp", mbg:"assets/m_quote2.webp", shade:0,
+    quote:["CozyPlace truly lives up to its name! The atmosphere is warm, inviting, and thoughtfully designed, making it the perfect spot to relax..",
+           "The staff are exceptionally friendly and attentive without being intrusive. Everything—from the décor to the service—feels intentional and comforting.",
+           "CozyPlace makes you feel right at home. Highly recommend"] },
+  { label:"Google Reviews", name:"Daryl Kang", bg:"assets/quote3.webp", mbg:"assets/m_quote3.webp", shade:0,
+    quote:["Watched a movie at CozyPlace with friends and family and honestly, it’s a good spot. The place is clean, comfy, and very chill. Seating is cozy, sound and screen quality are decent, and it feels private without being awkward.",
+           "Great for families, small groups, or just a relaxed movie night without the crowd.",
+           "Recommended if you want a comfortable, stress-free experience."] },
 ];
-const SLIDE_SECONDS = 2;
+// Same behaviour as cozyplace.sg: slides sideways (0.7s), loops, every 3s, pauses while hovering the review.
+const SLIDE_SECONDS = 3;
+const SLIDE_SPEED_MS = 700;
 
 const FAQS = [
   { q:"What is The CozyPlace Experience?",
@@ -763,49 +782,60 @@ document.addEventListener("keydown", e => {
 const deep = location.hash.match(/^#location-(.+)$/);
 if (deep) { const i = LOCATIONS.findIndex(l => l.id === deep[1]); if (i > -1) openModal(i); }
 
-/* --- Customer review slideshow --- */
+/* --- Customer review slider (horizontal, looping) --- */
 const slidesEl = $("#slides"), dotsEl = $("#dots"), reviewsEl = $("#reviews");
-slidesEl.innerHTML = REVIEWS.map((r, i) => `
-  <div class="slide${i === 0 ? " active" : ""}" role="group" aria-roledescription="slide" aria-label="${i+1} of ${REVIEWS.length}" ${i ? 'aria-hidden="true"' : ""}>
+const slideHTML = (r, i, clone) => `
+  <div class="slide" ${clone ? 'aria-hidden="true"' : `role="group" aria-roledescription="slide" aria-label="${i+1} of ${REVIEWS.length}"`}>
     <div class="bg" style="--bg:url('${r.bg}');--mbg:url('${r.mbg}')"></div>
     <div class="shade" style="background:rgba(0,0,0,${r.shade || 0})"></div>
     <figure>
       <p class="who-label">${esc(r.label)}</p>
-      <blockquote class="t-h4">${esc(r.quote)}</blockquote>
+      <blockquote class="t-h4">${r.quote.map(p => `<p>${esc(p)}</p>`).join("")}</blockquote>
       <figcaption>${esc(r.name)}</figcaption>
     </figure>
-  </div>`).join("");
+  </div>`;
+// a copy of the first slide at the end lets the last → first move keep sliding forward
+slidesEl.className = "slides";
+slidesEl.innerHTML = REVIEWS.map((r, i) => slideHTML(r, i, false)).join("") + slideHTML(REVIEWS[0], 0, true);
+slidesEl.style.transitionDuration = SLIDE_SPEED_MS + "ms";
 dotsEl.innerHTML = REVIEWS.map((_, i) => `<button class="dot" aria-label="Show review ${i+1}"${i === 0 ? ' aria-current="true"' : ""}></button>`).join("");
-const slides = [...slidesEl.children], dots = [...dotsEl.children];
-// Rotates on its own while on screen; stops for good once the visitor picks a slide
-// (dot, swipe or keyboard), so they're never fighting the timer.
-let slideIdx = 0, timer = null, userTookOver = false, onScreen = false;
-function goTo(i){
-  slideIdx = (i + slides.length) % slides.length;
-  slides.forEach((s, n) => { s.classList.toggle("active", n === slideIdx); s.setAttribute("aria-hidden", n !== slideIdx); });
-  dots.forEach((d, n) => d.setAttribute("aria-current", n === slideIdx));
+const dots = [...dotsEl.children], N = REVIEWS.length;
+let pos = 0, timer = null, hovering = false, onScreen = false;
+function setDots(){ dots.forEach((d, n) => d.setAttribute("aria-current", n === pos % N)); }
+function moveTo(p, animate = true){
+  slidesEl.style.transition = animate && !reduceMotion ? "" : "none";
+  pos = p; slidesEl.style.transform = `translateX(-${pos * 100}%)`; setDots();
+  if (!animate) void slidesEl.offsetWidth; // apply the jump before any next animation
+  [...slidesEl.children].forEach((s, n) => { if (n < N) s.setAttribute("aria-hidden", n !== pos % N); });
 }
+slidesEl.addEventListener("transitionend", () => { if (pos === N) moveTo(0, false); });
+function next(){ if (pos >= N) moveTo(0, false); requestAnimationFrame(() => moveTo(pos + 1)); }
+function prev(){ if (pos === 0) moveTo(N, false); requestAnimationFrame(() => moveTo(pos - 1)); }
 function stop(){ clearInterval(timer); timer = null; }
 function play(){
   stop();
-  if (reduceMotion || userTookOver || !onScreen || document.hidden) return;
-  timer = setInterval(() => goTo(slideIdx + 1), SLIDE_SECONDS * 1000);
+  if (reduceMotion || hovering || !onScreen || document.hidden) return;
+  timer = setInterval(next, SLIDE_SECONDS * 1000);
 }
-function choose(i){ userTookOver = true; stop(); goTo(i); }
-dots.forEach((d, i) => d.addEventListener("click", () => choose(i)));
+dots.forEach((d, i) => d.addEventListener("click", () => { moveTo(i); play(); }));
 dotsEl.addEventListener("keydown", e => {
-  if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
-  e.preventDefault(); choose(slideIdx + (e.key === "ArrowRight" ? 1 : -1)); dots[slideIdx].focus();
+  if (e.key === "ArrowRight") { e.preventDefault(); next(); play(); }
+  if (e.key === "ArrowLeft")  { e.preventDefault(); prev(); play(); }
 });
+// pause while the pointer is on the review text or the dots (the section fills the screen,
+// so pausing on the whole section would stop it almost all the time)
+reviewsEl.addEventListener("mouseover", e => { const h = !!e.target.closest(".slide figure, .dots"); if (h !== hovering) { hovering = h; play(); } });
+reviewsEl.addEventListener("mouseleave", () => { hovering = false; play(); });
 let touchX = null;
 reviewsEl.addEventListener("touchstart", e => { touchX = e.touches[0].clientX; }, {passive:true});
 reviewsEl.addEventListener("touchend", e => {
   if (touchX === null) return;
   const dx = e.changedTouches[0].clientX - touchX; touchX = null;
-  if (Math.abs(dx) > 40) choose(slideIdx + (dx < 0 ? 1 : -1));
+  if (Math.abs(dx) > 40) { dx < 0 ? next() : prev(); play(); }
 });
 new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; play(); }, {threshold:.3}).observe(reviewsEl);
 document.addEventListener("visibilitychange", play);
+moveTo(0, false);
 
 /* --- FAQ accordion (one open at a time) --- */
 const chevron = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6.5 9.5 12 15l5.5-5.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';

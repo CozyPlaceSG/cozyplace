@@ -7,7 +7,7 @@ Open `index.html` in a browser to preview. There's no build step.
 - **Locations**: clicking a location card opens that outlet's pop-up. The tabs inside switch outlets without closing it. Close with the Close button or Esc.
   Deep links work, e.g. `index.html#location-paya-lebar`.
 - **FAQ**: an accordion. Only one answer is open at a time.
-- **Customer reviews**: a slideshow that rotates every 2 seconds while on screen. Visitors can pick a slide with the dots, arrow keys or a swipe, which stops the auto-rotation.
+- **Customer reviews**: Google reviews from cozyplace.sg in a looping slider, like cozyplace.sg: slides sideways (0.7s) every 3 seconds while on screen, pauses while the pointer is on the review text or dots, and supports dots, arrow keys and swiping.
 - **Booking bar**: a sticky "Find Your CozyPlace" bar appears after you scroll past the hero.
 - Every "Book" button goes to `https://cozyplace.sg/booking-detail`.
 
@@ -16,7 +16,7 @@ All editable data is at the top of the `<script>` block in `index.html`:
 - `BOOKING_URL`: where the Book buttons go
 - `LOCATIONS`: name, address, MRT line, card image and room `photos` for each outlet
 - `FAQS`: questions and answers (a blank line starts a new paragraph)
-- `REVIEWS`: customer review slides — label, quote, name, desktop background (`bg`), mobile background (`mbg`) and an optional `shade` (0–1) to darken the photo. `SLIDE_SECONDS` sets how long each slide shows.
+- `REVIEWS`: customer review slides — label, quote (a list of paragraphs), name, desktop background (`bg`), mobile background (`mbg`) and an optional `shade` (0–1) to darken the photo. `SLIDE_SECONDS` sets how long each slide shows.
 
 Room photos: every outlet currently uses the Jalan Besar set (`assets/pop1–6.webp`).
 To give an outlet its own photos, add the images to `assets/` and change that outlet's `photos` list.
