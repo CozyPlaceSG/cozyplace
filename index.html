@@ -641,15 +641,15 @@ body.lock{overflow:hidden}
    ========================================================= */
 const BOOKING_URL = "https://cozyplace.sg/booking-detail";
 
-// Room photos currently reuse the Jalan Besar set for every outlet.
-// Replace each outlet's `photos` list with its own images.
-const SHARED_PHOTOS = ["pop1","pop2","pop3","pop4","pop5","pop6"].map(n => `assets/${n}.webp`);
+// Room photos per outlet (from each Desktop Pop-Up in Figma; used on desktop and mobile).
+// `card` = desktop card image, `mcard` = mobile card image.
+const pics = (key, n) => Array.from({length:n}, (_, i) => `assets/pop_${key}_${i+1}.webp`);
 
 const LOCATIONS = [
-  { id:"bencoolen",  name:"Bencoolen",   address:"171 Bencoolen, 03-01, S189641",         mrt:"5 mins walk from Bugis, Bencoolen & Rochor MRT", card:"assets/loc_bencoolen.webp",  photos:SHARED_PHOTOS },
-  { id:"bukit-timah",name:"Bukit Timah", address:"12 Bukit Timah Street #12-01, S340128", mrt:"5 mins walk from Beauty World MRT",              card:"assets/loc_bukittimah.webp", photos:SHARED_PHOTOS },
-  { id:"jalan-besar",name:"Jalan Besar", address:"316 Jalan Besar, 03-01, S208974",       mrt:"5 mins walk from Farrer Park MRT/ City Sq Mall", card:"assets/loc_jalanbesar.webp", photos:SHARED_PHOTOS },
-  { id:"paya-lebar", name:"Paya Lebar",  address:"72A Geylang Rd, 02-01, S389599",        mrt:"5 mins walk from Paya Lebar MRT, Exit D",        card:"assets/loc_payalebar.webp",  photos:SHARED_PHOTOS },
+  { id:"bencoolen",  name:"Bencoolen",   address:"171 Bencoolen, 03-01, S189641",         mrt:"5 mins walk from Bugis, Bencoolen & Rochor MRT", card:"assets/loc_bencoolen_v2.webp",  mcard:"assets/m_loc_bencoolen.webp",  photos:pics("bencoolen",6) },
+  { id:"bukit-timah",name:"Bukit Timah", address:"12 Bukit Timah Street #12-01, S340128", mrt:"5 mins walk from Beauty World MRT",              card:"assets/loc_bukittimah_v2.webp", mcard:"assets/m_loc_bukittimah.webp", photos:pics("bukittimah",4) },
+  { id:"jalan-besar",name:"Jalan Besar", address:"316 Jalan Besar, 03-01, S208974",       mrt:"5 mins walk from Farrer Park MRT/ City Sq Mall", card:"assets/loc_jalanbesar_v2.webp", mcard:"assets/m_loc_jalanbesar.webp", photos:pics("jalanbesar",6) },
+  { id:"paya-lebar", name:"Paya Lebar",  address:"72A Geylang Rd, 02-01, S389599",        mrt:"5 mins walk from Paya Lebar MRT, Exit D",        card:"assets/loc_payalebar_v2.webp",  mcard:"assets/m_loc_payalebar.webp",  photos:pics("payalebar",6) },
 ];
 
 // Customer reviews (Google reviews; copy as edited in Figma). One entry per slide.
@@ -697,7 +697,7 @@ document.querySelectorAll(".book-link").forEach(a => a.href = BOOKING_URL);
 const locTrack = $("#locTrack");
 locTrack.innerHTML = LOCATIONS.map((l, i) => `
   <button class="loc-card" data-i="${i}" aria-label="View ${esc(l.name)} rooms">
-    <img src="${l.card}" alt="" loading="lazy">
+    <picture><source media="(max-width:767px)" srcset="${l.mcard}"><img src="${l.card}" alt="" loading="lazy"></picture>
     <span class="cue">View rooms</span>
     <span class="meta">
       <span class="name">${esc(l.name)}</span>

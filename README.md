@@ -18,8 +18,9 @@ All editable data is at the top of the `<script>` block in `index.html`:
 - `FAQS`: questions and answers (a blank line starts a new paragraph)
 - `REVIEWS`: customer review slides — label, quote (a list of paragraphs), optional `mquote` (shorter mobile version), name, desktop background (`bg`), mobile background (`mbg`) and an optional `shade` (0–1) to darken the photo. `SLIDE_SECONDS` sets how long each slide shows.
 
-Room photos: every outlet currently uses the Jalan Besar set (`assets/pop1–6.webp`).
-To give an outlet its own photos, add the images to `assets/` and change that outlet's `photos` list.
+Room photos: each outlet has its own set, `assets/pop_<outlet>_1.webp`, `pop_<outlet>_2.webp` and so on (Bukit Timah has 4, the others 6).
+The same photos show in the pop-up on desktop and mobile. To change them, replace the files or edit that outlet's `photos` line.
+Card images: `card` is the desktop card, `mcard` is the mobile card.
 
 ## Font
 Headings use **Sunliner Revival**, served from `assets/fonts/`:
