@@ -89,7 +89,13 @@ br.d-br{display:inline}
 .intro .t-body span + span{margin-left:.25em}
 
 /* ---------- Locations ---------- */
-.locations{padding:56px 0 120px;overflow:hidden}
+.proof{margin-top:40px;padding:40px 64px}
+.proof ul{list-style:none;margin:0;padding:0;display:flex;justify-content:center;align-items:center;gap:40px}
+.proof li{display:flex;align-items:center}
+.proof svg{width:48px;height:48px;flex:none;fill:var(--green)}
+.proof svg.r{transform:scaleX(-1)}
+.proof p{font:400 24px/1.5 var(--display);color:var(--green);text-align:center}
+.locations{padding:38px 0 120px;overflow:hidden}
 .divider{width:83px;height:1.5px;background:#d4d4d4;margin:0 auto 62.5px}
 .loc-head{display:grid;gap:16px;text-align:center}
 .loc-head .t-hlabel,.loc-head .t-h2{color:var(--green)}
@@ -211,8 +217,7 @@ br.d-br{display:inline}
 .faq-card{max-width:914px;margin-inline:auto;background:var(--green);border-radius:24px;padding:80px;display:grid;grid-template-columns:353px 353px;justify-content:space-between;gap:48px}
 .faq-card .t-h2{color:var(--sage)}
 .faq-list{display:grid;gap:40px;align-self:start}
-.faq-line{height:1px;margin-top:16px;background:rgba(255,255,255,.6);transition:background .2s}
-.faq-item.open .faq-line{height:1.5px;background:var(--sage)}
+.faq-line{height:1px;margin-top:16px;background:rgba(255,255,255,.6)}
 .faq-q{width:100%;display:flex;gap:24px;align-items:flex-start;justify-content:space-between;text-align:left;font:400 16px/1.4 var(--display);color:#fff;transition:color .2s}
 .faq-q svg{flex:0 0 24px;height:24px;transition:transform .3s ease}
 .faq-q[aria-expanded="true"]{color:var(--sage)}
@@ -316,7 +321,10 @@ body.lock{overflow:hidden}
   .intro .t-body span{display:block}
   .intro .t-body span + span{margin:12px 0 0}
 
-  .locations{padding:65px 0 80px}
+  .proof{padding:0 24px}
+  .proof ul{flex-direction:column}
+  .proof p{font-size:17px;line-height:1.4}
+  .locations{padding:80px 0 80px}
   .divider{margin-bottom:57.5px}
   .loc-head{gap:8px}
   .loc-head .titles{gap:8px}
@@ -426,7 +434,15 @@ body.lock{overflow:hidden}
 
   <section class="intro wrap">
     <h1 class="t-hero reveal">The coziest date to<br class="d-br"> unwind<br class="m-br"> and connect</h1>
-    <p class="t-body reveal">We create the coziest room that feels like your own.<br>Switch off and spend unhurried time together over a show, a slow meal or a long talk.</p>
+    <div class="t-body stack reveal"><p>We create the coziest room that feels like your own.</p><p>Switch off and spend unhurried time together over a show, a slow meal or a long talk.</p></div>
+  </section>
+
+  <!-- Social proof -->
+  <section class="proof reveal" aria-label="Reviews">
+    <ul>
+      <li><svg viewBox="0 0 48 48" aria-hidden="true"><path id="laurel" d="M18.492 13.222C18.066 16.506 20.7 19.554 20.7 19.554C20.7 19.554 24.026 17.278 24.452 13.994C24.878 10.708 22.244 7.65998 22.244 7.65998C22.244 7.65998 18.92 9.93998 18.492 13.222ZM15.366 24.26C16.758 27.266 20.614 28.446 20.614 28.446C20.614 28.446 22.214 24.752 20.822 21.746C19.43 18.74 15.574 17.558 15.574 17.558C15.574 17.558 13.974 21.254 15.366 24.26ZM17.008 34.83C19.664 36.816 23.62 36.028 23.62 36.028C23.62 36.028 23.268 32.018 20.612 30.032C17.956 28.046 14 28.834 14 28.834C14 28.834 14.352 32.844 17.008 34.83ZM24.226 43.426C27.236 44.822 30.944 43.236 30.944 43.236C30.944 43.236 29.77 39.386 26.76 37.988C23.75 36.592 20.044 38.18 20.044 38.18C20.044 38.18 21.216 42.03 24.226 43.426ZM27.562 5.93598C25.142 8.20198 25.234 12.224 25.234 12.224C25.234 12.224 29.254 12.576 31.674 10.31C34.094 8.04398 34.002 4.01998 34.002 4.01998C34.002 4.01998 29.982 3.66998 27.562 5.93598Z"/></svg><p>Over 3000<br>Verified Reviews</p><svg class="r" viewBox="0 0 48 48" aria-hidden="true"><use href="#laurel"/></svg></li>
+      <li><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#laurel"/></svg><p>4.9<br>Google Reviews</p><svg class="r" viewBox="0 0 48 48" aria-hidden="true"><use href="#laurel"/></svg></li>
+    </ul>
   </section>
 
   <!-- Locations -->
@@ -500,7 +516,7 @@ body.lock{overflow:hidden}
           <p class="num t-h1">6 hours a week</p>
           <div class="t-body stack">
             <p>Backed by 50 Years of Relationship Research, the longest ever.</p>
-            <p>The Gottman Institute research shows that less intentional time spent together results with relationship dissatisfaction.</p>
+            <p>The Gottman Institute research shows that less intentional time spent together results in relationship dissatisfaction.</p>
             <p>It further shows that happy couples gave each other about six intentional hours a week.</p>
           </div>
         </div>
