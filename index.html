@@ -144,8 +144,7 @@ br.d-br{display:inline}
 .q-card{display:grid;align-content:center;background:#7a3a1a url(assets/research_card.webp) center/cover no-repeat;color:#fff;font:400 24px/1.25 var(--body);text-align:center}
 .s-card{background:var(--sage);display:flex;flex-direction:column;justify-content:center;gap:16px}
 .s-card .num{color:var(--green)}
-.s-card .stack .gm{margin-top:24px}
-.s-card .stack .gm span{display:block}
+.s-card .stack > * + *{margin-top:24px}
 .takeaway{margin-top:24px;background:var(--green);color:#fff;border-radius:var(--r-card);padding:96px 120px;display:flex;flex-direction:column;align-items:center;gap:24px;text-align:center}
 .takeaway .t-hlabel{color:rgba(255,255,255,.7)}
 .takeaway .line{max-width:800px}
@@ -212,14 +211,15 @@ br.d-br{display:inline}
 .faq-card{max-width:914px;margin-inline:auto;background:var(--green);border-radius:24px;padding:80px;display:grid;grid-template-columns:353px 353px;justify-content:space-between;gap:48px}
 .faq-card .t-h2{color:var(--sage)}
 .faq-list{display:grid;gap:40px;align-self:start}
-.faq-item{border-bottom:1px solid rgba(255,255,255,.6);padding-bottom:16px}
+.faq-line{height:1px;margin-top:16px;background:rgba(255,255,255,.6);transition:background .2s}
+.faq-item.open .faq-line{height:1.5px;background:var(--sage)}
 .faq-q{width:100%;display:flex;gap:24px;align-items:flex-start;justify-content:space-between;text-align:left;font:400 16px/1.4 var(--display);color:#fff;transition:color .2s}
 .faq-q svg{flex:0 0 24px;height:24px;transition:transform .3s ease}
 .faq-q[aria-expanded="true"]{color:var(--sage)}
 .faq-q[aria-expanded="true"] svg{transform:rotate(180deg)}
 .faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease}
 .faq-a > div{overflow:hidden}
-.faq-a .inner{padding-top:24px;color:#fff}
+.faq-a .inner{padding:16px 0 40px;color:#fff}
 .faq-item.open .faq-a{grid-template-rows:1fr}
 
 /* ---------- Sticky booking bar ---------- */
@@ -293,7 +293,6 @@ body.lock{overflow:hidden}
   body{font-size:15px;line-height:1.5}
   .bar-space{height:73px}
   .d-only{display:none}
-  .guarantee .tm{display:none}
   .m-only{display:inline}
   br.m-br{display:inline}
   br.d-br{display:none}
@@ -354,7 +353,7 @@ body.lock{overflow:hidden}
   .q-card,.s-card{min-height:0;padding:40px 24px;text-align:center}
   .q-card{min-height:320px;font:400 20px/1.3 var(--body);background-image:url(assets/m_research.webp)}
   .s-card .stack span{display:block;margin-top:var(--ps)}
-  .s-card .stack .gm{margin-top:var(--ps)}
+  .s-card .stack > * + *{margin-top:var(--ps)}
   .takeaway{margin-top:16px;padding:56px 24px;gap:16px}
   .takeaway .line{font-size:22px;line-height:1.2}
 
@@ -399,7 +398,7 @@ body.lock{overflow:hidden}
   .faq-card .t-h2{font-size:32px;line-height:1.1}
   .faq-list{gap:28px}
   .faq-q{font-size:15px;gap:16px}
-  .faq-a .inner{padding-top:16px}
+  .faq-a .inner{padding:24px 0 24px}
 
   .book-bar .in{min-height:73px;padding:16px 24px}
   .book-bar .t{font-size:15px;text-transform:none}
@@ -427,7 +426,7 @@ body.lock{overflow:hidden}
 
   <section class="intro wrap">
     <h1 class="t-hero reveal">The coziest date to<br class="d-br"> unwind<br class="m-br"> and connect</h1>
-    <p class="t-body reveal">We create the coziest room that feels like your own. Switch off and spend unhurried time together over a show, a slow meal or a long talk.</p>
+    <p class="t-body reveal">We create the coziest room that feels like your own.<br>Switch off and spend unhurried time together over a show, a slow meal or a long talk.</p>
   </section>
 
   <!-- Locations -->
@@ -501,7 +500,8 @@ body.lock{overflow:hidden}
           <p class="num t-h1">6 hours a week</p>
           <div class="t-body stack">
             <p>Backed by 50 Years of Relationship Research, the longest ever.</p>
-            <p class="gm">The Gottman Institute research shows that less intentional time spent together largely correlates with relationship dissatisfaction. <span>The research further shows that happy couples gave each other about six intentional hours a week.</span></p>
+            <p>The Gottman Institute research shows that less intentional time spent together results with relationship dissatisfaction.</p>
+            <p>It further shows that happy couples gave each other about six intentional hours a week.</p>
           </div>
         </div>
       </div>
@@ -862,6 +862,7 @@ faqList.innerHTML = FAQS.map((f, i) => {
   const paras = f.a.split(/\n\n+/).map(p => `<p>${esc(p).replace(/\n/g, "<br>")}</p>`).join("");
   return `<div class="faq-item">
     <h3><button class="faq-q" id="q${i}" aria-expanded="false" aria-controls="a${i}"><span>${esc(f.q)}</span>${chevron}</button></h3>
+    <div class="faq-line" role="presentation"></div>
     <div class="faq-a" id="a${i}" role="region" aria-labelledby="q${i}"><div><div class="inner t-body stack">${paras}</div></div></div>
   </div>`;
 }).join("");
