@@ -891,9 +891,9 @@ faqList.addEventListener("click", e => {
   if (opening) { item.classList.add("open"); btn.setAttribute("aria-expanded", "true"); }
 });
 
-/* --- Sticky booking bar: appears after the hero --- */
+/* --- Sticky booking bar: appears as soon as the visitor starts scrolling --- */
 const bar = $("#bookBar");
-const toggleBar = () => bar.classList.toggle("show", window.scrollY > 480);
+const toggleBar = () => bar.classList.toggle("show", window.scrollY > 10);
 window.addEventListener("scroll", toggleBar, {passive:true}); toggleBar();
 
 /* --- Reveal on scroll --- */
